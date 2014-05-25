@@ -85,7 +85,7 @@ public class MasterViewController implements INodeHandlerDelagate{
     public void userRequestInformationTable() {
         List<Object> dataModel = masterController.getDataModel();
         Object lastRow = dataModel.get(dataModel.size()-1);
-        this.nodeRepresentationDelegate.reloadTable((HashMap<String, Object>) lastRow);
+        nodeRepresentationDelegate.reloadTable((HashMap<String, Object>) lastRow);
     }
     
 }
