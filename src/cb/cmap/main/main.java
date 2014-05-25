@@ -49,7 +49,6 @@ public class main {
         MainView     mainView                       = new MainView();
         
         masterViewController.setMasterController(masterController);
-        masterViewController.setDataModel(dataModel);
         masterViewController.setNodeRepresentationDelegate(mainView);
         masterViewController.setGravityServiceDelegate(serviceDelegate);
         

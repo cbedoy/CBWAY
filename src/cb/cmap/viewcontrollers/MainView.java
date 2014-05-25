@@ -8,17 +8,10 @@ package cb.cmap.viewcontrollers;
 
 import cb.cmap.bussinescontrollers.MasterViewController;
 import cb.cmap.interfaces.IGravityServiceDelegate;
+import cb.cmap.interfaces.INodeHandlerDelagate;
 import cb.cmap.interfaces.INodeRepresentationDelegate;
-import cb.cmap.lib.CBGeocoding;
-import cb.map.services.GravityMethodService;
-import java.awt.geom.Point2D;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,11 +19,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Carlos
  */
 public class MainView extends javax.swing.JFrame implements INodeRepresentationDelegate{
-    private List<Object>            dataModel;
     private final DefaultTableModel defaultTableModel;
-    private CBGeocoding             geocoding;
-    private GravityMethodService    gravityMethodService;
     private MasterViewController    masterViewController;
+    private INodeHandlerDelagate    nodeHandlerDelegate;
+    
     public MainView() {
         initComponents();
         setVisible(true);
@@ -38,8 +30,6 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
         defaultTableModel = new DefaultTableModel();
         defaultTableModel.setColumnIdentifiers(new Object[]{"Name", "Latitud", "Longitud", "Cost"});
         dataCenter.setModel(defaultTableModel);
-        dataModel = new ArrayList<Object>();
-        geocoding = new CBGeocoding();
         
     }
 
@@ -57,9 +47,14 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
         sName = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
         actionSolve = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        sPositionX = new javax.swing.JLabel();
+        sPositionY = new javax.swing.JLabel();
         sCost = new javax.swing.JTextField();
+        sCountry = new javax.swing.JLabel();
+        sState = new javax.swing.JLabel();
+        sCity = new javax.swing.JLabel();
+        sDelegation = new javax.swing.JLabel();
+        sAbbrevation = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,9 +85,19 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
             }
         });
 
-        jLabel1.setText("POINT X");
+        sPositionX.setText("POINT X");
 
-        jLabel2.setText("POINT Y");
+        sPositionY.setText("POINT Y");
+
+        sCountry.setText("COUNTRY");
+
+        sState.setText("STATE");
+
+        sCity.setText("CITY");
+
+        sDelegation.setText("DELEGATION");
+
+        sAbbrevation.setText("ABBREVIATURE");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,9 +115,15 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
                         .addComponent(addButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
                             .addComponent(actionSolve)
-                            .addComponent(jLabel2))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(sCountry)
+                                .addComponent(sPositionY)
+                                .addComponent(sState)
+                                .addComponent(sCity)
+                                .addComponent(sDelegation)
+                                .addComponent(sAbbrevation)
+                                .addComponent(sPositionX)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -131,9 +142,19 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
                 .addGap(110, 110, 110)
                 .addComponent(actionSolve)
                 .addGap(51, 51, 51)
-                .addComponent(jLabel1)
+                .addComponent(sPositionX)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(sPositionY)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sCountry)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sState)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sCity)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sDelegation)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(sAbbrevation)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -141,22 +162,19 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        
-        String country = sName.getText();
-        Double cost    = Double.parseDouble(sCost.getText());
+
+        String country                                  = sName.getText();
+        Double cost                                     = Double.parseDouble(sCost.getText());
         masterViewController.getMasterController().userSelectedCountryWithCost(country, cost);
-        
+        sName.setText(null);
+        sCost.setText(null);
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void actionSolveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionSolveActionPerformed
-        /*IGravityServiceDelegate gravityServiceDelegate = masterViewController.getGravityServiceDelegate();
-        
-        if(gravityMethodService == null)
-            gravityMethodService                = new GravityMethodService();
-        gravityMethodService                    .userWantsSolved(dataModel);
-        HashMap<String, Object> bestPosition    = gravityMethodService.getBestPosition();
-        this.jLabel1                            .setText(bestPosition.get("position_x").toString());
-        this.jLabel2                            .setText(bestPosition.get("position_y").toString());*/
+        IGravityServiceDelegate gravityServiceDelegate  = masterViewController.getGravityServiceDelegate();
+        List<Object> dataModel                          = masterViewController.getMasterController().getDataModel();
+        gravityServiceDelegate.solveNodes(dataModel);
+        masterViewController.userRequestSolution();
     }//GEN-LAST:event_actionSolveActionPerformed
 
     /**
@@ -198,19 +216,44 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     private javax.swing.JButton actionSolve;
     private javax.swing.JButton addButton;
     private javax.swing.JTable dataCenter;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel sAbbrevation;
+    private javax.swing.JLabel sCity;
     private javax.swing.JTextField sCost;
+    private javax.swing.JLabel sCountry;
+    private javax.swing.JLabel sDelegation;
     private javax.swing.JTextField sName;
+    private javax.swing.JLabel sPositionX;
+    private javax.swing.JLabel sPositionY;
+    private javax.swing.JLabel sState;
     // End of variables declaration//GEN-END:variables
 
     public void setMasterViewController(MasterViewController masterViewController) {
         this.masterViewController = masterViewController;
     }
 
+    
     @Override
-    public void reloadData(List<Object> dataModel) {
-       
+    public void reloadData(HashMap<String, Object> dataModel) {
+        
+        sCountry    .setText(dataModel.get("country").toString());
+        sCity       .setText(dataModel.get("city").toString());
+        sAbbrevation.setText(dataModel.get("abbrevation").toString());
+        sState      .setText(dataModel.get("state").toString());
+        sPositionX  .setText(dataModel.get("position_x").toString());
+        sPositionY  .setText(dataModel.get("position_y").toString());
+    }
+
+    @Override
+    public void reloadTable(HashMap<String, Object> dataModel) {
+        
+    }
+
+    public INodeHandlerDelagate getNodeHandlerDelegate() {
+        return nodeHandlerDelegate;
+    }
+
+    public void setNodeHandlerDelegate(INodeHandlerDelagate nodeHandlerDelegate) {
+        this.nodeHandlerDelegate = nodeHandlerDelegate;
     }
 }

@@ -116,28 +116,28 @@ public class CBGeocoding extends CBMaps {
         this.addressFound="";
         URL url=createURL(address);
             try {
-                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance(); 
-                DocumentBuilder builder = factory.newDocumentBuilder(); 
-                Document document = builder.parse(url.openStream()); 
+                DocumentBuilderFactory factory      = DocumentBuilderFactory.newInstance(); 
+                DocumentBuilder builder             = factory.newDocumentBuilder(); 
+                Document document                   = builder.parse(url.openStream()); 
 
-                XPathFactory xpathFactory = XPathFactory.newInstance(); 
-                XPath xpath = xpathFactory.newXPath(); 
+                XPathFactory xpathFactory           = XPathFactory.newInstance(); 
+                XPath xpath                         = xpathFactory.newXPath(); 
 
-                NodeList nodeLatLng = (NodeList) xpath.evaluate("GeocodeResponse/result/geometry/location[1]/*", 
+                NodeList nodeLatLng                 = (NodeList) xpath.evaluate("GeocodeResponse/result/geometry/location[1]/*", 
                          document, XPathConstants.NODESET);
-                NodeList nodeAddress = (NodeList) xpath.evaluate("GeocodeResponse/result/formatted_address", 
+                NodeList nodeAddress                = (NodeList) xpath.evaluate("GeocodeResponse/result/formatted_address", 
                          document, XPathConstants.NODESET);
                 NodeList nodePostal = (NodeList) xpath.evaluate(this.pathPostalcode, 
                          document, XPathConstants.NODESET);
                 
-                Double lat=0.0;
-                Double lng=0.0;
+                Double lat                      = 0.0;
+                Double lng                      = 0.0;
                 try {
-                    this.postalcode=this.getNodesPostalcode(nodePostal);
-                    this.addressFound="No data";
-                    this.addressFound=nodeAddress.item(0).getTextContent();
-                    lat = Double.valueOf(nodeLatLng.item(0).getTextContent());
-                    lng = Double.valueOf(nodeLatLng.item(1).getTextContent());
+                    this.postalcode             = this.getNodesPostalcode(nodePostal);
+                    this.addressFound           = "No data";
+                    this.addressFound           = nodeAddress.item(0).getTextContent();
+                    lat                         = Double.valueOf(nodeLatLng.item(0).getTextContent());
+                    lng                         = Double.valueOf(nodeLatLng.item(1).getTextContent());
                 } catch (Exception e) {
                      onError(url,"NO STATUS",e);
                 }
@@ -163,21 +163,16 @@ public class CBGeocoding extends CBMaps {
     public ArrayList<String> getAddress(Double latitude, Double longitude) throws UnsupportedEncodingException, MalformedURLException{
         URL url=createURL(latitude,longitude);
             try {
-                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance(); 
-                DocumentBuilder builder = factory.newDocumentBuilder(); 
-                Document document = builder.parse(url.openStream()); 
-
-                XPathFactory xpathFactory = XPathFactory.newInstance(); 
-                XPath xpath = xpathFactory.newXPath(); 
-
-                NodeList nodeAddress = (NodeList) xpath.evaluate("GeocodeResponse/result/formatted_address", 
-                         document, XPathConstants.NODESET);
-                NodeList nodePostal = (NodeList) xpath.evaluate(this.pathPostalcode, 
-                         document, XPathConstants.NODESET);
+                DocumentBuilderFactory factory      = DocumentBuilderFactory.newInstance(); 
+                DocumentBuilder builder             = factory.newDocumentBuilder(); 
+                Document document                   = builder.parse(url.openStream()); 
+                XPathFactory xpathFactory           = XPathFactory.newInstance(); 
+                XPath xpath                         = xpathFactory.newXPath(); 
+                NodeList nodeAddress                = (NodeList) xpath.evaluate("GeocodeResponse/result/formatted_address", document, XPathConstants.NODESET);
+                NodeList nodePostal                 = (NodeList) xpath.evaluate(this.pathPostalcode, document, XPathConstants.NODESET);
                 
-                ArrayList<String> result=super.getNodesString(nodeAddress);
-                this.postalcode=this.getNodesPostalcode(nodePostal);
-                
+                ArrayList<String> result            = super.getNodesString(nodeAddress);
+                this.postalcode                     = this.getNodesPostalcode(nodePostal);
                 this.storeInfoRequest(url, null, this.getStatus(xpath, document), null);
                 return result;
             } catch (Exception e) {

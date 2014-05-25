@@ -1,8 +1,13 @@
 package cb.cmap.bussinescontrollers;
 
 import cb.cmap.interfaces.IGravityServiceDelegate;
+import cb.cmap.interfaces.INodeHandlerDelagate;
 import cb.cmap.interfaces.INodeRepresentationDelegate;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 /**
  *
@@ -17,11 +22,10 @@ import java.util.List;
  * 25-may-2014 - 0:18:42
  */
 
-public class MasterViewController{
+public class MasterViewController implements INodeHandlerDelagate{
     
     private MasterController            masterController;
     private static MasterViewController masterViewController;
-    private List<Object>                dataModel;
     private INodeRepresentationDelegate nodeRepresentationDelegate;
     private IGravityServiceDelegate     gravityServiceDelegate;
     
@@ -41,17 +45,8 @@ public class MasterViewController{
         this.masterController = masterController;
     }
 
-
-    public void setDataModel(List<Object> dataModel) {
-        this.dataModel = dataModel;
-    }
-
     public void setNodeRepresentationDelegate(INodeRepresentationDelegate nodeRepresentationDelegate) {
         this.nodeRepresentationDelegate = nodeRepresentationDelegate;
-    }
-
-    public List<Object> getDataModel() {
-        return dataModel;
     }
 
     public IGravityServiceDelegate getGravityServiceDelegate() {
@@ -61,6 +56,33 @@ public class MasterViewController{
     public void setGravityServiceDelegate(IGravityServiceDelegate gravityServiceDelegate) {
         this.gravityServiceDelegate = gravityServiceDelegate;
     }
-    
+
+    public INodeRepresentationDelegate getNodeRepresentationDelegate() {
+        return nodeRepresentationDelegate;
+    }
+
+    @Override
+    public void userRequestSolution() {
+        try {
+            HashMap<String, Object> solution    = gravityServiceDelegate.getSolution();
+            double positionX                    = (double) solution.get("position_x");
+            double positionY                    = (double) solution.get("position_y");
+            ArrayList<String> address           = masterController.getGeocoding().getAddress(positionX, positionY);
+            String[] countryState               = address.get(1).split(", ");
+            String[] cityAbbreviature           = address.get(0).split(", ");
+            solution.put("country", address.get(2));
+            solution.put("state", countryState[0]);
+            solution.put("city", cityAbbreviature[0]);
+            solution.put("abbreviature", cityAbbreviature[1]);
+            nodeRepresentationDelegate.reloadData(solution);
+        } catch (UnsupportedEncodingException | MalformedURLException ex) {
+            
+        }
+    }
+
+    @Override
+    public void userRequestInformationTable() {
+        
+    }
     
 }

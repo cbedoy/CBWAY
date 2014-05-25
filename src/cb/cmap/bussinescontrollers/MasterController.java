@@ -97,12 +97,11 @@ public class MasterController implements INodeDelegate{
         try {
             HashMap<String, Object> data    = new HashMap<String, Object>();
             Point2D.Double coordinates      = geocoding.getCoordinates(country);
-            data.put("name",                country);
-            data.put("latitude",            coordinates.getX());
-            data.put("length",              coordinates.getY());
-            data.put("cost",                cost);
-            dataModel                       .add(data);
-            coordinates                     = null;
+            data.put("name", country);
+            data.put("latitude", coordinates.getX());
+            data.put("length", coordinates.getY());
+            data.put("cost", cost);
+            dataModel.add(data);
         } catch (UnsupportedEncodingException | MalformedURLException ex) {
             
         }
@@ -110,6 +109,10 @@ public class MasterController implements INodeDelegate{
 
     public void setDataModel(List<Object> dataModel) {
         this.dataModel = dataModel;
+    }
+
+    public List<Object> getDataModel() {
+        return dataModel;
     }
     
     
