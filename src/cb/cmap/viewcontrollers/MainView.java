@@ -6,6 +6,9 @@
 
 package cb.cmap.viewcontrollers;
 
+import cb.cmap.bussinescontrollers.MasterViewController;
+import cb.cmap.interfaces.IGravityServiceDelegate;
+import cb.cmap.interfaces.INodeRepresentationDelegate;
 import cb.cmap.lib.CBGeocoding;
 import cb.map.services.GravityMethodService;
 import java.awt.geom.Point2D;
@@ -22,11 +25,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Carlos
  */
-public class MainView extends javax.swing.JFrame {
+public class MainView extends javax.swing.JFrame implements INodeRepresentationDelegate{
     private List<Object>            dataModel;
     private final DefaultTableModel defaultTableModel;
     private CBGeocoding             geocoding;
     private GravityMethodService    gravityMethodService;
+    private MasterViewController    masterViewController;
     public MainView() {
         initComponents();
         setVisible(true);
@@ -137,32 +141,22 @@ public class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        try {
-            HashMap<String, Object> data    = new HashMap<String, Object>();
-            Point2D.Double coordinates      = geocoding.getCoordinates(sName.getText());
-            data.put("name",                sName.getText());
-            data.put("latitude",            coordinates.getX());
-            data.put("length",              coordinates.getY());
-            data.put("cost",                Double.parseDouble(sCost.getText()));
-            dataModel                       .add(data);
-            this.defaultTableModel          .addRow(new Object[]{
-                                                        sName.getText(), 
-                                                        coordinates.getX(), 
-                                                        coordinates.getY(), 
-                                                        sCost.getText()});
-            
-        } catch (UnsupportedEncodingException | MalformedURLException ex) {
-            
-        }
+        
+        String country = sName.getText();
+        Double cost    = Double.parseDouble(sCost.getText());
+        masterViewController.getMasterController().userSelectedCountryWithCost(country, cost);
+        
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void actionSolveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionSolveActionPerformed
+        /*IGravityServiceDelegate gravityServiceDelegate = masterViewController.getGravityServiceDelegate();
+        
         if(gravityMethodService == null)
             gravityMethodService                = new GravityMethodService();
         gravityMethodService                    .userWantsSolved(dataModel);
         HashMap<String, Object> bestPosition    = gravityMethodService.getBestPosition();
         this.jLabel1                            .setText(bestPosition.get("position_x").toString());
-        this.jLabel2                            .setText(bestPosition.get("position_y").toString());
+        this.jLabel2                            .setText(bestPosition.get("position_y").toString());*/
     }//GEN-LAST:event_actionSolveActionPerformed
 
     /**
@@ -210,4 +204,13 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField sCost;
     private javax.swing.JTextField sName;
     // End of variables declaration//GEN-END:variables
+
+    public void setMasterViewController(MasterViewController masterViewController) {
+        this.masterViewController = masterViewController;
+    }
+
+    @Override
+    public void reloadData(List<Object> dataModel) {
+       
+    }
 }

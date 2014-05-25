@@ -6,7 +6,7 @@ import java.util.List;
  *
  * Carlos Alfredo Cervantes Bedoy
  * Mobile Developer
- * CBGrandSlam
+ * CBWAY
  * Email:           carlos.bedoy@gmail.com
  * Facebook:        https://www.facebook.com/carlos.bedoy
  * Github:          https://github.com/cbedoy

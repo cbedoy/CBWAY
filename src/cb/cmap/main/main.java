@@ -1,6 +1,17 @@
 package cb.cmap.main;
 
+import cb.cmap.bussinescontrollers.MasterController;
+import cb.cmap.bussinescontrollers.MasterViewController;
+import cb.cmap.interfaces.IGravityServiceDelegate;
+import cb.cmap.lib.CBElevation;
+import cb.cmap.lib.CBGeocoding;
+import cb.cmap.lib.CBPlaces;
+import cb.cmap.lib.CBRoute;
+import cb.cmap.lib.CBStreetView;
 import cb.cmap.viewcontrollers.MainView;
+import cb.map.services.GravityMethodService;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,6 +28,34 @@ import cb.cmap.viewcontrollers.MainView;
 
 public class main {
     public static void main(String[]cbedoy){
-        new MainView();
+        long time_start = System.currentTimeMillis();
+        MasterController masterController           = MasterController.getInstanse();
+        GravityMethodService gravityMethodService   = new GravityMethodService();
+        List<Object> dataModel                      = new ArrayList<Object>();
+        
+        masterController.setElevation(new CBElevation());
+        masterController.setGeocoding(new CBGeocoding());
+        masterController.setPlaces(new CBPlaces());
+        masterController.setRoute(new CBRoute());
+        masterController.setStreetView(new CBStreetView());
+        masterController.setGravityService(gravityMethodService);
+        masterController.setDataModel(dataModel);
+        
+       
+        
+        IGravityServiceDelegate serviceDelegate     = gravityMethodService;
+        MasterViewController masterViewController   = MasterViewController.getInstance();
+        
+        MainView     mainView                       = new MainView();
+        
+        masterViewController.setMasterController(masterController);
+        masterViewController.setDataModel(dataModel);
+        masterViewController.setNodeRepresentationDelegate(mainView);
+        masterViewController.setGravityServiceDelegate(serviceDelegate);
+        
+        mainView.setMasterViewController(masterViewController);
+        
+        long time_end = System.currentTimeMillis();
+        System.out.println(time_end-time_start);
     }
 }

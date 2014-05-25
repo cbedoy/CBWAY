@@ -1,14 +1,14 @@
 package cb.map.services;
 
 
-import cb.cmap.interfaces.IGravityDelegate;
+import cb.cmap.interfaces.IGravityServiceDelegate;
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by Carlos on 11/05/2014.
  */
-public class GravityMethodService implements IGravityDelegate{
+public class GravityMethodService implements IGravityServiceDelegate{
 
     private List<Object>     dataModel;
     private double           totalCost;
@@ -20,15 +20,7 @@ public class GravityMethodService implements IGravityDelegate{
         gravityX            = 0;
         gravityY            = 0;
     }
-
-    @Override
-    public void userWantsSolved(List<Object> countries) {
-        this.dataModel = countries;
-        calculateGravityX();
-        calculateGravityY();
-        calculateSummation();
-    }
-
+    
     private void calculateSummation() {
         for(Object information : dataModel){
             HashMap<String, Object> data = (HashMap<String, Object>) information;
@@ -51,7 +43,15 @@ public class GravityMethodService implements IGravityDelegate{
     }
 
     @Override
-    public HashMap<String, Object> getBestPosition() {
+    public void solveNodes(List<Object> dataModel) {
+        this.dataModel = dataModel;
+        calculateGravityX();
+        calculateGravityY();
+        calculateSummation();
+    }
+
+    @Override
+    public HashMap<String, Object> getSolution() {
         HashMap<String, Object> data = new HashMap<String, Object>();
         data.put("position_x", gravityX/totalCost );
         data.put("position_y", gravityY/totalCost );

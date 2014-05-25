@@ -4,7 +4,7 @@ package cb.cmap.interfaces;
  *
  * Carlos Alfredo Cervantes Bedoy
  * Mobile Developer
- * CBGrandSlam
+ * CBWAY
  * Email:           carlos.bedoy@gmail.com
  * Facebook:        https://www.facebook.com/carlos.bedoy
  * Github:          https://github.com/cbedoy
@@ -15,6 +15,6 @@ package cb.cmap.interfaces;
 
 public interface INodeDelegate {
     
-    public void userSelected(String country);
+    public void userSelectedCountryWithCost(String country, Double cost);
     
 }
