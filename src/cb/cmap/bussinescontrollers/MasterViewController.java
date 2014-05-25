@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -82,7 +83,9 @@ public class MasterViewController implements INodeHandlerDelagate{
 
     @Override
     public void userRequestInformationTable() {
-        
+        List<Object> dataModel = masterController.getDataModel();
+        Object lastRow = dataModel.get(dataModel.size()-1);
+        this.nodeRepresentationDelegate.reloadTable((HashMap<String, Object>) lastRow);
     }
     
 }

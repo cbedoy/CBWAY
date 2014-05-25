@@ -52,6 +52,7 @@ public class main {
         masterViewController.setNodeRepresentationDelegate(mainView);
         masterViewController.setGravityServiceDelegate(serviceDelegate);
         
+        mainView.setNodeHandlerDelegate(masterViewController);
         mainView.setMasterViewController(masterViewController);
         
         long time_end = System.currentTimeMillis();
