@@ -6,12 +6,17 @@
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/main/main.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/interfaces/INodeRepresentationDelegate.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/bussinescontrollers/MasterViewController.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/lib/CBGeocoding.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/bussinescontrollers/MasterController.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/viewcontrollers/SolutionView.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/interfaces/INodeHandlerDelegate.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/maps/assets/logo.png</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/viewcontrollers/MainView.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/interfaces/INodeDelegate.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/map/services/GravityMethodService.java</file>
-            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/interfaces/INodeHandlerDelagate.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/viewcontrollers/SplashView.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/interfaces/IGravityServiceDelegate.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/lib/CBElevation.java</file>
         </group>
     </open-files>
 </project-private>

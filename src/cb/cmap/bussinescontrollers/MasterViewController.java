@@ -1,13 +1,19 @@
 package cb.cmap.bussinescontrollers;
 
 import cb.cmap.interfaces.IGravityServiceDelegate;
-import cb.cmap.interfaces.INodeHandlerDelagate;
+import cb.cmap.interfaces.INodeDelegate;
+import cb.cmap.interfaces.INodeHandlerDelegate;
 import cb.cmap.interfaces.INodeRepresentationDelegate;
+import cb.cmap.lib.CBGeocoding;
+import cb.map.services.GravityMethodService;
+import java.awt.geom.Point2D;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -23,13 +29,12 @@ import java.util.List;
  * 25-may-2014 - 0:18:42
  */
 
-public class MasterViewController implements INodeHandlerDelagate{
+public class MasterViewController implements INodeHandlerDelegate, INodeDelegate{
     
     private MasterController            masterController;
     private static MasterViewController masterViewController;
     private INodeRepresentationDelegate nodeRepresentationDelegate;
     private IGravityServiceDelegate     gravityServiceDelegate;
-    
     
     public static MasterViewController getInstance(){
         if(masterViewController == null)
@@ -83,9 +88,26 @@ public class MasterViewController implements INodeHandlerDelagate{
 
     @Override
     public void userRequestInformationTable() {
-        List<Object> dataModel = masterController.getDataModel();
-        Object lastRow = dataModel.get(dataModel.size()-1);
+        List<Object> dataModel          = masterController.getDataModel();
+        Object lastRow                  = dataModel.get(dataModel.size()-1);
         nodeRepresentationDelegate.reloadTable((HashMap<String, Object>) lastRow);
     }
-    
+
+    @Override
+    public void userSelectedCountryWithCost(String country, Double cost) {
+        try {
+            List<Object> dataModel          = masterController.getDataModel();
+            HashMap<String, Object> data    = new HashMap<String, Object>();
+            CBGeocoding geocoding           = masterController.getGeocoding();
+            Point2D.Double coordinates      = geocoding.getCoordinates(country);
+            data.put("name", country);
+            data.put("latitude", coordinates.getX());
+            data.put("length", coordinates.getY());
+            data.put("cost", cost);
+            dataModel.add(data);
+            masterController.setDataModel(dataModel);
+        } catch (UnsupportedEncodingException | MalformedURLException ex) {
+            
+        }
+    }    
 }

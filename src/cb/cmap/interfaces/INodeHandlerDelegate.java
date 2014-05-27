@@ -13,7 +13,7 @@ package cb.cmap.interfaces;
  * 25-may-2014 - 13:30:17
  */
 
-public interface INodeHandlerDelagate {
+public interface INodeHandlerDelegate {
     public void userRequestSolution();
     public void userRequestInformationTable();
 }

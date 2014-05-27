@@ -3,6 +3,9 @@ package cb.cmap.main;
 import cb.cmap.bussinescontrollers.MasterController;
 import cb.cmap.bussinescontrollers.MasterViewController;
 import cb.cmap.interfaces.IGravityServiceDelegate;
+import cb.cmap.interfaces.INodeDelegate;
+import cb.cmap.interfaces.INodeHandlerDelegate;
+import cb.cmap.interfaces.INodeRepresentationDelegate;
 import cb.cmap.lib.CBElevation;
 import cb.cmap.lib.CBGeocoding;
 import cb.cmap.lib.CBPlaces;
@@ -29,6 +32,8 @@ import java.util.List;
 public class main {
     public static void main(String[]cbedoy){
         long time_start = System.currentTimeMillis();
+        
+        //Master controller instances
         MasterController masterController           = MasterController.getInstanse();
         GravityMethodService gravityMethodService   = new GravityMethodService();
         List<Object> dataModel                      = new ArrayList<Object>();
@@ -41,19 +46,20 @@ public class main {
         masterController.setGravityService(gravityMethodService);
         masterController.setDataModel(dataModel);
         
-       
-        
-        IGravityServiceDelegate serviceDelegate     = gravityMethodService;
-        MasterViewController masterViewController   = MasterViewController.getInstance();
-        
-        MainView     mainView                       = new MainView();
+        MainView     mainView                               = new MainView();
+        IGravityServiceDelegate serviceDelegate             = gravityMethodService;
+        MasterViewController masterViewController           = MasterViewController.getInstance();
+        INodeRepresentationDelegate representationDelegate  = mainView;
+        INodeDelegate nodeDelegate                          = masterViewController;
+        INodeHandlerDelegate handlerDelegate                = masterViewController;
         
         masterViewController.setMasterController(masterController);
-        masterViewController.setNodeRepresentationDelegate(mainView);
+        masterViewController.setNodeRepresentationDelegate(representationDelegate);
         masterViewController.setGravityServiceDelegate(serviceDelegate);
         
-        mainView.setNodeHandlerDelegate(masterViewController);
+        mainView.setNodeHandlerDelegate(handlerDelegate);
         mainView.setMasterViewController(masterViewController);
+        mainView.setNodeDelegate(nodeDelegate);
         
         long time_end = System.currentTimeMillis();
         System.out.println(time_end-time_start);
