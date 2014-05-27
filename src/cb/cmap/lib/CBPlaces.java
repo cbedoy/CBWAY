@@ -371,18 +371,6 @@ public class CBPlaces extends CBMaps {
         return urlReturn;
     }
     
-    /**
-     * Devuelve la foto del local a través de su referencia. Dicha referencia, se obtiene a partir de 
-     * una petición previa de detalles del local (getPlaceReview), que, en caso de haber fotografías, 
-     * almacena todas sus referencias (dichas referencias se obtiene con la función getPhotosReference.
-     * @param photoreference string con referencia de fotografía
-     * @param maxWidth ancho máximo de la imagen devuelta
-     * @return devuelve la imagen asociada a dicha referencia del local<br/>
-     * En caso de error, devuelve null
-     * @see CBPlaces getPlaces(double, double, int, String, String, maps.java.CBPlaces.Rankby, java.util.ArrayList)
-     * @see CBPlaces getPlacesDetails(String)
-     * @see CBPlaces getPhotosReference()
-     */
     public Image getPhoto(String photoreference,int maxWidth) throws MalformedURLException{
         URL url=createURL(photoreference,maxWidth);
         try {

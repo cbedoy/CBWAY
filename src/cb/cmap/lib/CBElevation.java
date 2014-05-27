@@ -25,8 +25,8 @@ import org.w3c.dom.NodeList;
  */
 public class CBElevation extends CBMaps {
 
-    private final String URLRoot="http://maps.googleapis.com/maps/api/elevation/xml";
-    private final String pathStatus="ElevationResponse/status";
+    private final String URLRoot        = "http://maps.googleapis.com/maps/api/elevation/xml";
+    private final String pathStatus     = "ElevationResponse/status";
     
     private double resolution;
     private ArrayList<Double> resolutionList=new ArrayList<Double>();
@@ -58,12 +58,12 @@ public class CBElevation extends CBMaps {
         return urlReturn;
     }
     private URL createURL(ArrayList<Double> LatiLong) throws MalformedURLException{
-        String locations="";
+        String locations            = "";
         for (int i = 0; i < LatiLong.size(); i+=2) {
             locations+=String.valueOf(LatiLong.get(i)) + "," + String.valueOf(LatiLong.get(i+1)) + "|";
         }
         locations=locations.substring(0, locations.length()-1);
-        URL urlReturn=new URL(URLRoot + "?locations=" + locations + super.getSelectPropertiesRequest());
+        URL urlReturn               = new URL(URLRoot + "?locations=" + locations + super.getSelectPropertiesRequest());
         return urlReturn;
     }
     
@@ -76,8 +76,7 @@ public class CBElevation extends CBMaps {
     protected String getStatus(XPath xpath, Document document) {
         NodeList nodes;
         try {
-            nodes = (NodeList) xpath.evaluate(this.pathStatus, 
-                document, XPathConstants.NODESET);
+            nodes           = (NodeList) xpath.evaluate(this.pathStatus, document, XPathConstants.NODESET);
             return nodes.item(0).getTextContent();
         } catch (XPathExpressionException ex) {
             return null;
@@ -102,23 +101,23 @@ public class CBElevation extends CBMaps {
         URL url=createURL(latitude,longitude);
         this.resolution=0.0;
             try {
-                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance(); 
-                DocumentBuilder builder = factory.newDocumentBuilder(); 
-                Document document = builder.parse(url.openStream()); 
+                DocumentBuilderFactory factory  = DocumentBuilderFactory.newInstance(); 
+                DocumentBuilder builder         = factory.newDocumentBuilder(); 
+                Document document               = builder.parse(url.openStream()); 
 
-                XPathFactory xpathFactory = XPathFactory.newInstance(); 
+                XPathFactory xpathFactory       = XPathFactory.newInstance(); 
                 XPath xpath = xpathFactory.newXPath(); 
 
-                NodeList nodeElevation = (NodeList) xpath.evaluate("ElevationResponse/result/elevation", 
+                NodeList nodeElevation          = (NodeList) xpath.evaluate("ElevationResponse/result/elevation", 
                          document, XPathConstants.NODESET);
-                NodeList nodeResolution = (NodeList) xpath.evaluate("ElevationResponse/result/resolution", 
+                NodeList nodeResolution         = (NodeList) xpath.evaluate("ElevationResponse/result/resolution", 
                          document, XPathConstants.NODESET);
                 
-               double elevationResult=0.0;
+               double elevationResult   = 0.0;
                
                try {
-                   elevationResult=Double.valueOf(nodeElevation.item(0).getTextContent());
-                   this.resolution=Double.valueOf(nodeResolution.item(0).getTextContent());
+                   elevationResult              = Double.valueOf(nodeElevation.item(0).getTextContent());
+                   this.resolution              = Double.valueOf(nodeResolution.item(0).getTextContent());
                 } catch (Exception e) {
                      onError(url,"NO STATUS",e);
                 }

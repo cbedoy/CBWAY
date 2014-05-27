@@ -24,17 +24,14 @@ import org.w3c.dom.NodeList;
 public abstract class CBMaps {
 
     //request properties 
-    private static int connectTimeout=300;
-    private static String region="es";
-    private static String language="es";
-    private static Boolean sensor= Boolean.FALSE;
-    private static String APIKey="";
+    private static int connectTimeout       = 300;
+    private static String region            = "es";
+    private static String language          = "es";
+    private static Boolean sensor           = Boolean.FALSE;
+    private static String APIKey            = "";
     
     //Stock request
     private static String[][] stockRequest=new String[0][6];
-
-    
-
     
     //Abstract methods
     protected abstract void onError(URL urlRequest,String status,Exception ex);
@@ -97,7 +94,7 @@ public abstract class CBMaps {
     }
     
     /**
-    * Author: Christian d'Heureuse (www.source-code.biz, www.inventec.ch/chdh)
+    * 
     * Reallocates an array with a new size, and copies the contents
     * of the old array to the new array.
     * @param oldArray  the old array, to be reallocated.

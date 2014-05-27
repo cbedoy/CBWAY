@@ -27,32 +27,17 @@ import org.w3c.dom.NodeList;
  */
 public class CBGeocoding extends CBMaps {
 
-    private final String URLRoot="http://maps.google.com/maps/api/geocode/xml";
-    private final String pathStatus="GeocodeResponse/status";
-    private final String pathPostalcode="GeocodeResponse/result/address_component";
+    private final String URLRoot        = "http://maps.google.com/maps/api/geocode/xml";
+    private final String pathStatus     = "GeocodeResponse/status";
+    private final String pathPostalcode = "GeocodeResponse/result/address_component";
     
     private String addressFound;
     private String postalcode;
     
-    /**
-     * Devuelve la dirección encontrada a partir de la enviada como parámetro en la función getCoordinates.
-     * <b>REQUIERE PRIMERAMENTE HACER PETICIÓN DE COORDENADAS (getCoordinates).</b>
-     * @return devuelve la dirección encontrada.
-     * En caso de no encontrar dirección, devuelve "No data"
-     * @see CBGeocoding#getCoordinates(String)
-     */
     public String getAddressFound() {
         return addressFound;
     }
     
-    /**
-     * Devuelve el código postal asociado a una dirección postal (se debe indicar calle/número) o coordenada geográfica.
-     * <b>REQUIERE PRIMERAMENTE HACER PETICIÓN DE COORDENADAS O DE DIRECCIÓN (getCoordinates o getAddress).</b>
-     * @return devuelve el código postal asociado a la petición
-     * En caso de no encontrar código postal, devuelve "No data"
-     * @see CBGeocoding#getAddress(Double, Double)
-     * @see CBGeocoding#getCoordinates(String)
-     */
     public String getPostalcode() {
         return postalcode;
     }
@@ -150,16 +135,7 @@ public class CBGeocoding extends CBMaps {
                 return null;
             }
      }
-    
-    /**
-     * Esta función "traduce" coordenadas geográficas (como 40.4171111,-3.7031133), en una dirección postal ("Madrid, Puerta del Sol")
-     * @param latitude latitud del punto a codificar
-     * @param longitude longitud del punto a codificar
-     * @return devuelve un ArrayList<String> con todas las direcciones postales asociadas al punto especificado. Índices
-     * menores del ArrayList, especifican direcciones postales más específicas.
-     * Devuelve null en caso de error.
-     * @see CBGeocoding#getPostalcode()
-     */
+
     public ArrayList<String> getAddress(Double latitude, Double longitude) throws UnsupportedEncodingException, MalformedURLException{
         URL url=createURL(latitude,longitude);
             try {

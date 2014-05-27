@@ -31,7 +31,13 @@ public class StaticCBMaps extends CBMaps {
      * <b>jpg:</b> especifica el formato de compresión JPEG.<br/>
      * <b>jpg_baseline:</b> especifica un formato de compresión JPEG no progresivo.
      */
-    public enum Format{png,png32,gif,jpg,jpg_baseline}
+    public enum Format{
+        png,
+        png32,
+        gif,
+        jpg,
+        jpg_baseline
+    }
     
     /**
      * Define el tipo de mapa que se va a generar. Sus posibles valores son:<br/>
