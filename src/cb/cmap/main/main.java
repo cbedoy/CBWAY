@@ -6,12 +6,14 @@ import cb.cmap.interfaces.IGravityServiceDelegate;
 import cb.cmap.interfaces.INodeDelegate;
 import cb.cmap.interfaces.INodeHandlerDelegate;
 import cb.cmap.interfaces.INodeRepresentationDelegate;
+import cb.cmap.interfaces.IViewDelegate;
 import cb.cmap.lib.CBElevation;
 import cb.cmap.lib.CBGeocoding;
 import cb.cmap.lib.CBPlaces;
 import cb.cmap.lib.CBRoute;
 import cb.cmap.lib.CBStreetView;
 import cb.cmap.viewcontrollers.MainView;
+import cb.cmap.viewcontrollers.SplashView;
 import cb.map.services.GravityMethodService;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,9 @@ import java.util.List;
 public class main {
     public static void main(String[]cbedoy){
         long time_start = System.currentTimeMillis();
+        SplashView splash                           = new SplashView();
         
+        IViewDelegate viewDelegate                  = splash;
         //Master controller instances
         MasterController masterController           = MasterController.getInstanse();
         GravityMethodService gravityMethodService   = new GravityMethodService();
@@ -52,7 +56,7 @@ public class main {
         INodeRepresentationDelegate representationDelegate  = mainView;
         INodeDelegate nodeDelegate                          = masterViewController;
         INodeHandlerDelegate handlerDelegate                = masterViewController;
-        
+        representationDelegate.reloadData(null);
         masterViewController.setMasterController(masterController);
         masterViewController.setNodeRepresentationDelegate(representationDelegate);
         masterViewController.setGravityServiceDelegate(serviceDelegate);
@@ -62,6 +66,7 @@ public class main {
         mainView.setNodeDelegate(nodeDelegate);
         
         long time_end = System.currentTimeMillis();
+        viewDelegate.hideView();
         System.out.println(time_end-time_start);
     }
 }

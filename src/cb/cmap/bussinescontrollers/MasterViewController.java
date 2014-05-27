@@ -78,8 +78,8 @@ public class MasterViewController implements INodeHandlerDelegate, INodeDelegate
             String[] cityAbbreviature           = address.get(0).split(", ");
             solution.put("country", address.get(2));
             solution.put("state", countryState[0]);
-            solution.put("city", cityAbbreviature[0]);
-            solution.put("abbreviature", cityAbbreviature[1]);
+            solution.put("city", cityAbbreviature[1]);
+            solution.put("delegation", cityAbbreviature[0]);
             nodeRepresentationDelegate.reloadData(solution);
         } catch (UnsupportedEncodingException | MalformedURLException ex) {
             

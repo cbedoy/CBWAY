@@ -56,14 +56,16 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
         actionSolve = new javax.swing.JButton();
         addButton = new javax.swing.JButton();
         sName = new javax.swing.JTextField();
-        sCost = new javax.swing.JTextField();
-        sDelegation = new javax.swing.JLabel();
-        sAbbrevation = new javax.swing.JLabel();
-        sState = new javax.swing.JLabel();
-        sCity = new javax.swing.JLabel();
         sCountry = new javax.swing.JLabel();
         sPositionX = new javax.swing.JLabel();
         sPositionY = new javax.swing.JLabel();
+        sCost = new javax.swing.JTextField();
+        latitude_view = new javax.swing.JLabel();
+        lenght_view = new javax.swing.JLabel();
+        country_view = new javax.swing.JLabel();
+        city_view = new javax.swing.JLabel();
+        state_view = new javax.swing.JLabel();
+        delegation_view = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,6 +134,9 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
         jPanel3.setBackground(new java.awt.Color(90, 74, 76));
         jPanel3.setForeground(new java.awt.Color(240, 240, 240));
 
+        actionSolve.setBackground(new java.awt.Color(255, 255, 255));
+        actionSolve.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        actionSolve.setForeground(new java.awt.Color(153, 153, 153));
         actionSolve.setText("Solve");
         actionSolve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,6 +144,8 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
             }
         });
 
+        addButton.setBackground(new java.awt.Color(255, 255, 255));
+        addButton.setForeground(new java.awt.Color(153, 153, 153));
         addButton.setText("Add");
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,56 +153,71 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
             }
         });
 
-        sDelegation.setForeground(new java.awt.Color(240, 240, 240));
-        sDelegation.setText("DELEGATION");
-
-        sAbbrevation.setForeground(new java.awt.Color(240, 240, 240));
-        sAbbrevation.setText("Abreviatura");
-
-        sState.setForeground(new java.awt.Color(240, 240, 240));
-        sState.setText("Estado");
-
-        sCity.setForeground(new java.awt.Color(240, 240, 240));
-        sCity.setText("Ciudad");
-
-        sCountry.setForeground(new java.awt.Color(240, 240, 240));
+        sCountry.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        sCountry.setForeground(new java.awt.Color(255, 255, 255));
         sCountry.setText("Pais");
 
-        sPositionX.setForeground(new java.awt.Color(240, 240, 240));
+        sPositionX.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        sPositionX.setForeground(new java.awt.Color(255, 255, 255));
         sPositionX.setText("Latitud");
 
-        sPositionY.setForeground(new java.awt.Color(240, 240, 240));
+        sPositionY.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        sPositionY.setForeground(new java.awt.Color(255, 255, 255));
         sPositionY.setText("Longitud");
+
+        latitude_view.setForeground(new java.awt.Color(224, 224, 224));
+        latitude_view.setText("jLabel3");
+
+        lenght_view.setForeground(new java.awt.Color(224, 224, 224));
+        lenght_view.setText("jLabel3");
+
+        country_view.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        country_view.setForeground(new java.awt.Color(224, 224, 224));
+        country_view.setText("jLabel3");
+
+        city_view.setForeground(new java.awt.Color(224, 224, 224));
+        city_view.setText("jLabel3");
+
+        state_view.setForeground(new java.awt.Color(224, 224, 224));
+        state_view.setText("jLabel3");
+
+        delegation_view.setForeground(new java.awt.Color(224, 224, 224));
+        delegation_view.setText("jLabel3");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(261, 261, 261)
-                        .addComponent(sDelegation)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sPositionY)
                             .addComponent(sPositionX)
+                            .addComponent(sPositionY)
                             .addComponent(sCountry))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lenght_view, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(latitude_view, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(sState)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(sCost, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
+                                .addComponent(sCost, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(sName, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(sAbbrevation)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(actionSolve))
-                            .addComponent(sCity))))
+                            .addComponent(sName, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(delegation_view, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(country_view)
+                                .addComponent(state_view, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(city_view, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(actionSolve)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -204,28 +226,31 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(sPositionX)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sPositionY)
-                        .addGap(18, 18, 18)
-                        .addComponent(sCountry))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(sName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addButton)
+                            .addComponent(sCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(sPositionX)
+                            .addComponent(latitude_view))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(sPositionY)
+                            .addComponent(lenght_view))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(addButton)
-                                .addComponent(sCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(sDelegation))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sCity)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sState)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(actionSolve)
-                            .addComponent(sAbbrevation))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(country_view)
+                            .addComponent(sCountry))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(state_view)
+                .addGap(1, 1, 1)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(delegation_view)
+                    .addComponent(city_view)
+                    .addComponent(actionSolve))
+                .addGap(0, 30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -305,22 +330,24 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actionSolve;
     private javax.swing.JButton addButton;
+    private javax.swing.JLabel city_view;
+    private javax.swing.JLabel country_view;
     private javax.swing.JTable dataCenter;
+    private javax.swing.JLabel delegation_view;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel sAbbrevation;
-    private javax.swing.JLabel sCity;
+    private javax.swing.JLabel latitude_view;
+    private javax.swing.JLabel lenght_view;
     private javax.swing.JTextField sCost;
     private javax.swing.JLabel sCountry;
-    private javax.swing.JLabel sDelegation;
     private javax.swing.JTextField sName;
     private javax.swing.JLabel sPositionX;
     private javax.swing.JLabel sPositionY;
-    private javax.swing.JLabel sState;
+    private javax.swing.JLabel state_view;
     // End of variables declaration//GEN-END:variables
 
     public void setMasterViewController(MasterViewController masterViewController) {
@@ -331,12 +358,22 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     @Override
     public void reloadData(HashMap<String, Object> dataModel) {
         
-        sCountry    .setText(dataModel.get("country").toString());
-        sCity       .setText(dataModel.get("city").toString());
-        sAbbrevation.setText(dataModel.get("abbreviature").toString());
-        sState      .setText(dataModel.get("state").toString());
-        sPositionX  .setText(dataModel.get("position_x").toString());
-        sPositionY  .setText(dataModel.get("position_y").toString());
+        if(dataModel != null){
+            country_view        .setText(dataModel.get("country").toString());
+            city_view           .setText(dataModel.get("city").toString());
+            delegation_view     .setText(dataModel.get("delegation").toString());
+            state_view          .setText(dataModel.get("state").toString());
+            latitude_view       .setText(dataModel.get("position_x").toString());
+            lenght_view         .setText(dataModel.get("position_y").toString());
+            
+        }else{
+            country_view.setText(null);
+            city_view.setText(null);
+            state_view.setText(null);
+            latitude_view.setText(null);
+            lenght_view.setText(null);
+            delegation_view.setText(null);
+        }
     }
 
     @Override

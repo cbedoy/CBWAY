@@ -1,14 +1,24 @@
 
 package cb.cmap.viewcontrollers;
 
+import cb.cmap.interfaces.IViewDelegate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Carlos
  */
-public class SplashView extends javax.swing.JFrame {
+public class SplashView extends javax.swing.JFrame implements Runnable, IViewDelegate{
 
+    Thread thread;
     public SplashView() {
         initComponents();
+        setVisible(true);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        thread = new Thread(this);
+        thread.start();
     }
 
     @SuppressWarnings("unchecked")
@@ -99,4 +109,35 @@ public class SplashView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar progressBar;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        int value=0;
+        while(true)
+        {
+            try {
+                Thread.sleep(100);
+                progressBar.setValue(value++);
+                if(value==100) hideView();
+            } catch (InterruptedException ex) {
+                
+            }
+        }
+    }
+
+    @Override
+    public void hideView() {
+        thread.stop();
+        hide();
+    }
+
+    @Override
+    public void reloadView() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void showView() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
