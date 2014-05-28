@@ -11,6 +11,7 @@ import cb.cmap.interfaces.IGravityServiceDelegate;
 import cb.cmap.interfaces.INodeDelegate;
 import cb.cmap.interfaces.INodeHandlerDelegate;
 import cb.cmap.interfaces.INodeRepresentationDelegate;
+import cb.cmap.interfaces.IWheaterServiceInformationDelegate;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -20,10 +21,11 @@ import javax.swing.table.DefaultTableModel;
  * @author Carlos
  */
 public class MainView extends javax.swing.JFrame implements INodeRepresentationDelegate{
-    private final DefaultTableModel defaultTableModel;
-    private MasterViewController    masterViewController;
-    private INodeHandlerDelegate    nodeHandlerDelegate;
-    private INodeDelegate           nodeDelegate;
+    private final DefaultTableModel             defaultTableModel;
+    private MasterViewController                masterViewController;
+    private INodeHandlerDelegate                nodeHandlerDelegate;
+    private INodeDelegate                       nodeDelegate;
+    private IWheaterServiceInformationDelegate  wheatherServiceInformationDelegate;
     
     public MainView() {
         initComponents();
@@ -394,4 +396,10 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     public void setNodeDelegate(INodeDelegate nodeDelegate) {
         this.nodeDelegate = nodeDelegate;
     }
+
+    public void setWheatherServiceInformationDelegate(IWheaterServiceInformationDelegate wheatherServiceInformationDelegate) {
+        this.wheatherServiceInformationDelegate = wheatherServiceInformationDelegate;
+    }
+
+
 }

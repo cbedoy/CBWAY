@@ -7,6 +7,8 @@ import cb.cmap.interfaces.INodeDelegate;
 import cb.cmap.interfaces.INodeHandlerDelegate;
 import cb.cmap.interfaces.INodeRepresentationDelegate;
 import cb.cmap.interfaces.IViewDelegate;
+import cb.cmap.interfaces.IWheaterServiceDelegate;
+import cb.cmap.interfaces.IWheaterServiceInformationDelegate;
 import cb.cmap.lib.CBElevation;
 import cb.cmap.lib.CBGeocoding;
 import cb.cmap.lib.CBPlaces;
@@ -15,6 +17,7 @@ import cb.cmap.lib.CBStreetView;
 import cb.cmap.viewcontrollers.MainView;
 import cb.cmap.viewcontrollers.SplashView;
 import cb.map.services.GravityMethodService;
+import cb.map.services.WeatherService;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,13 +37,17 @@ import java.util.List;
 public class main {
     public static void main(String[]cbedoy){
         long time_start = System.currentTimeMillis();
-        SplashView splash                           = new SplashView();
         
-        IViewDelegate viewDelegate                  = splash;
+        WeatherService wheatherService                                  = WeatherService.getInstance();
+        IWheaterServiceDelegate wheatherServiceDelegate                 = wheatherService;
+        IWheaterServiceInformationDelegate wheatherInformationDelegate  = wheatherService;       
+        SplashView splash                                               = new SplashView();
+            
+        IViewDelegate viewDelegate                                      = splash;
         //Master controller instances
-        MasterController masterController           = MasterController.getInstanse();
-        GravityMethodService gravityMethodService   = new GravityMethodService();
-        List<Object> dataModel                      = new ArrayList<Object>();
+        MasterController masterController                               = MasterController.getInstanse();
+        GravityMethodService gravityMethodService                       = new GravityMethodService();
+        List<Object> dataModel                                          = new ArrayList<Object>();
         
         masterController.setElevation(new CBElevation());
         masterController.setGeocoding(new CBGeocoding());
@@ -60,10 +67,11 @@ public class main {
         masterViewController.setMasterController(masterController);
         masterViewController.setNodeRepresentationDelegate(representationDelegate);
         masterViewController.setGravityServiceDelegate(serviceDelegate);
-        
+        masterViewController.setWheatherServiceDelegate(wheatherServiceDelegate);
         mainView.setNodeHandlerDelegate(handlerDelegate);
         mainView.setMasterViewController(masterViewController);
         mainView.setNodeDelegate(nodeDelegate);
+        mainView.setWheatherServiceInformationDelegate(wheatherInformationDelegate);
         
         long time_end = System.currentTimeMillis();
         viewDelegate.hideView();

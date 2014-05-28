@@ -1,5 +1,6 @@
 package cb.cmap.lib;
 
+import cb.cmap.interfaces.IMapDelegate;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,7 +22,7 @@ import org.w3c.dom.NodeList;
  * Facebook:    https://www.facebook.com/carlos.bedoy
  * ---------CODE && MUSIC ----------------------------------
  */
-public abstract class CBMaps {
+public abstract class CBMaps implements IMapDelegate{
 
     //request properties 
     private static int connectTimeout       = 300;

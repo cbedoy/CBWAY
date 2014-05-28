@@ -4,6 +4,7 @@ import cb.cmap.interfaces.IGravityServiceDelegate;
 import cb.cmap.interfaces.INodeDelegate;
 import cb.cmap.interfaces.INodeHandlerDelegate;
 import cb.cmap.interfaces.INodeRepresentationDelegate;
+import cb.cmap.interfaces.IWheaterServiceDelegate;
 import cb.cmap.lib.CBGeocoding;
 import cb.map.services.GravityMethodService;
 import java.awt.geom.Point2D;
@@ -35,6 +36,7 @@ public class MasterViewController implements INodeHandlerDelegate, INodeDelegate
     private static MasterViewController masterViewController;
     private INodeRepresentationDelegate nodeRepresentationDelegate;
     private IGravityServiceDelegate     gravityServiceDelegate;
+    private IWheaterServiceDelegate     wheatherServiceDelegate;
     
     public static MasterViewController getInstance(){
         if(masterViewController == null)
@@ -110,4 +112,8 @@ public class MasterViewController implements INodeHandlerDelegate, INodeDelegate
             
         }
     }    
+
+    public void setWheatherServiceDelegate(IWheaterServiceDelegate wheatherServiceDelegate) {
+        this.wheatherServiceDelegate = wheatherServiceDelegate;
+    }
 }

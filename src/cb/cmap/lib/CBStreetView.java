@@ -1,5 +1,6 @@
 package cb.cmap.lib;
 
+import cb.cmap.interfaces.IMapDelegate;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.io.UnsupportedEncodingException;
@@ -20,7 +21,7 @@ import org.w3c.dom.Document;
  * Facebook:    https://www.facebook.com/carlos.bedoy
  * ---------CODE && MUSIC ----------------------------------
  */
-public class CBStreetView extends CBMaps {
+public class CBStreetView extends CBMaps implements IMapDelegate{
     private final String URLRoot="http://maps.googleapis.com/maps/api/streetview";
     
     @Override

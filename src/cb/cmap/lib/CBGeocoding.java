@@ -1,5 +1,6 @@
 package cb.cmap.lib;
 
+import cb.cmap.interfaces.IMapDelegate;
 import java.awt.geom.Point2D;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -25,7 +26,7 @@ import org.w3c.dom.NodeList;
  * Facebook:    https://www.facebook.com/carlos.bedoy
  * ---------CODE && MUSIC ----------------------------------
  */
-public class CBGeocoding extends CBMaps {
+public class CBGeocoding extends CBMaps implements IMapDelegate{
 
     private final String URLRoot        = "http://maps.google.com/maps/api/geocode/xml";
     private final String pathStatus     = "GeocodeResponse/status";

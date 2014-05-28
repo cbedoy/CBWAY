@@ -1,6 +1,7 @@
 package cb.cmap.lib;
 
 
+import cb.cmap.interfaces.IMapDelegate;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import org.w3c.dom.NodeList;
  * Facebook:    https://www.facebook.com/carlos.bedoy
  * ---------CODE && MUSIC ----------------------------------
  */
-public class CBElevation extends CBMaps {
+public class CBElevation extends CBMaps implements IMapDelegate {
 
     private final String URLRoot        = "http://maps.googleapis.com/maps/api/elevation/xml";
     private final String pathStatus     = "ElevationResponse/status";

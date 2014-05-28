@@ -1,5 +1,6 @@
 package cb.cmap.lib;
 
+import cb.cmap.interfaces.IMapDelegate;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -23,7 +24,7 @@ import org.w3c.dom.NodeList;
  * Facebook:    https://www.facebook.com/carlos.bedoy
  * ---------CODE && MUSIC ----------------------------------
  */
-public class CBRoute extends CBMaps {
+public class CBRoute extends CBMaps implements IMapDelegate{
 
     private final String        URLRoot="http://maps.googleapis.com/maps/api/directions/xml";
     private final String        pathStatus="DirectionsResponse/status";
