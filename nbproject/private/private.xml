@@ -3,20 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/main/main.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/lib/StaticCBMaps.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/interfaces/INodeRepresentationDelegate.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/lib/CBRoute.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/bussinescontrollers/MasterViewController.java</file>
-            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/lib/CBGeocoding.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/lib/CBStreetView.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/bussinescontrollers/MasterController.java</file>
-            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/viewcontrollers/SolutionView.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/map/services/OpenWeatherService.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/interfaces/INodeHandlerDelegate.java</file>
-            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/maps/assets/logo.png</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/viewcontrollers/MainView.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/maps/assets/logo.png</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/lib/ShowCBMaps.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/viewcontrollers/SplashView.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/main/main.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/lib/CBGeocoding.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/lib/CBPlaces.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/viewcontrollers/SolutionView.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/interfaces/INodeDelegate.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/map/services/GravityMethodService.java</file>
-            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/viewcontrollers/SplashView.java</file>
-            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/interfaces/IGravityServiceDelegate.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/lib/CBMaps.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/interfaces/IViewDelegate.java</file>
             <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/lib/CBElevation.java</file>
+            <file>file:/C:/Users/Carlos/Documents/NetBeansProjects/CBWAY/src/cb/cmap/interfaces/IGravityServiceDelegate.java</file>
         </group>
     </open-files>
 </project-private>
