@@ -6,16 +6,12 @@ import cb.cmap.interfaces.INodeHandlerDelegate;
 import cb.cmap.interfaces.INodeRepresentationDelegate;
 import cb.cmap.interfaces.IWheaterServiceDelegate;
 import cb.cmap.lib.CBGeocoding;
-import cb.map.services.GravityMethodService;
 import java.awt.geom.Point2D;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 /**
  *

@@ -7,8 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -26,31 +25,75 @@ import org.json.simple.parser.ParseException;
  */
 
 public class OpenWeatherService{
-    
-    private final String rootURL = "http://api.openweathermap.org/data/2.5/weather?q";
-    private URLConnection urlConnection;
-    private BufferedReader bufferedReader;
-    private String response;
-    public static void main(String[]c) throws ParseException{
-        URL oracle;
+    public static void main(String[]cbedoy) throws ParseException{
         try {
-            oracle = new URL("http://api.openweathermap.org/data/2.5/weather?q=London,uk");
-            URLConnection yc = oracle.openConnection();
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                                    yc.getInputStream()));
+            URL urlDomain                       = new URL("http://api.openweathermap.org/data/2.5/weather?q=London,uk");
+            URLConnection urlConnection         = urlDomain.openConnection();
+            BufferedReader input                = new BufferedReader(new InputStreamReader(urlConnection.getInputStream())); 
+            String out                          = input.readLine();
+            JSONParser parser                   = new JSONParser();
+            Object parse                        = parser.parse(out);
+            JSONObject object                   = (JSONObject) parse;
             
-            String out = in.readLine();
-            System.out.println(out);
+            JSONObject coord                    = (JSONObject)object.get("coord");
+            JSONObject sys                      = (JSONObject)object.get("sys");
+            JSONObject main                     = (JSONObject)object.get("main");
+            JSONObject wind                     = (JSONObject)object.get("wind");
+            JSONObject rain                     = (JSONObject)object.get("rain");
+            JSONArray weather                   = (JSONArray)object.get("weather");
+            
+            Object id_weather                   = weather.get(0);
+            Object icon_weather                 = weather.get(1);
+            Object description_weather          = weather.get(2);
+            Object main_weather                 = weather.get(3);
+            
+            Object id                           = object.get("id");
+            Object dt                           = object.get("dt");
+            Object name                         = object.get("name");
+            Object code                         = object.get("cod");
+            
+            Object latitude                     = coord.get("lat");
+            Object lenght                       = coord.get("long");
+            
+            Object message                      = sys.get("message");
+            Object country                      = sys.get("country");
+            Object sunrise                      = sys.get("sunrise");
+            Object sunset                       = sys.get("sunset");
+            
+            Object temp                         = main.get("temp");
+            Object pressure                     = main.get("pressure");
+            Object humidity                     = main.get("humidity");
+            Object temp_min                     = main.get("temp_min");
+            Object temp_max                     = main.get("temp_max");
+            
+            Object speed                        = wind.get("speed");
+            Object deg                          = wind.get("deg");      
+            
+            Object rains                        = rain.get("1h");
+            
+            HashMap<String, Object> dataModel   = new HashMap<String, Object>();
+            dataModel.put("id", id);
+            dataModel.put("dt", dt);
+            dataModel.put("name", name);
+            dataModel.put("code", code);
+            dataModel.put("message", message);
+            dataModel.put("country", country);
+            dataModel.put("sunrise", sunrise);
+            dataModel.put("sunset", sunset);
+            dataModel.put("temp", temp);
+            dataModel.put("pressure", pressure);
+            dataModel.put("humidity", humidity);
+            dataModel.put("temp_max", temp_max);
+            dataModel.put("temp_min", temp_min);
+            dataModel.put("speed", speed);
+            dataModel.put("deg", deg);
+            dataModel.put("rains", rains);
+            dataModel.put("id_weather", id_weather);
+            dataModel.put("icon_weather", icon_weather);
+            dataModel.put("main_weather", main_weather);
+            dataModel.put("description_weather", description_weather);
             
             
-            JSONParser parser = new JSONParser();
-            Object parse = parser.parse(out);
-            
-            JSONObject object = (JSONObject) parse;
-            HashMap<String, Object> request  = new HashMap<String, Object>();
-            request.put("id", object.get("id"));
-            
-            System.out.println("1");
         } catch (MalformedURLException ex) {
             
         } catch (IOException ex) {
@@ -60,17 +103,9 @@ public class OpenWeatherService{
     }
     
     /*
-    {
-    "coord": {
-        "lon": -0.13,
-        "lat": 51.51
-    },
-    "sys": {
-        "message": 0.0349,
-        "country": "GB",
-        "sunrise": 1401249106,
-        "sunset": 1401307433
-    },
+    
+ 
+
     "weather": [
         {
             "id": 500,
@@ -85,29 +120,6 @@ public class OpenWeatherService{
             "icon": "09n"
         }
     ],
-    "base": "cmc stations",
-    "main": {
-        "temp": 283.15,
-        "pressure": 1011,
-        "humidity": 93,
-        "temp_min": 282.04,
-        "temp_max": 285.15
-    },
-    "wind": {
-        "speed": 4.6,
-        "deg": 280
-    },
-    "rain": {
-        "1h": 0.51
-    },
-    "clouds": {
-        "all": 92
-    },
-    "dt": 1401247845,
-    "id": 2643743,
-    "name": "London",
-    "cod": 200
-}
-    
+
     */
 }

@@ -3,6 +3,7 @@ package cb.cmap.main;
 import cb.cmap.bussinescontrollers.MasterController;
 import cb.cmap.bussinescontrollers.MasterViewController;
 import cb.cmap.interfaces.IGravityServiceDelegate;
+import cb.cmap.interfaces.IMapDelegate;
 import cb.cmap.interfaces.INodeDelegate;
 import cb.cmap.interfaces.INodeHandlerDelegate;
 import cb.cmap.interfaces.INodeRepresentationDelegate;
@@ -44,10 +45,16 @@ public class main {
         SplashView splash                                               = new SplashView();
             
         IViewDelegate viewDelegate                                      = splash;
-        //Master controller instances
         MasterController masterController                               = MasterController.getInstanse();
         GravityMethodService gravityMethodService                       = new GravityMethodService();
         List<Object> dataModel                                          = new ArrayList<Object>();
+        
+        IMapDelegate    elevationDelegate                               = new CBElevation();
+        IMapDelegate    geocodingDelegate                               = new CBGeocoding();
+        IMapDelegate    placesDelegate                                  = new CBPlaces();
+        IMapDelegate    routeDelegate                                   = new CBRoute();
+        IMapDelegate    streetDelegate                                  = new CBStreetView();
+        
         
         masterController.setElevation(new CBElevation());
         masterController.setGeocoding(new CBGeocoding());
@@ -63,11 +70,14 @@ public class main {
         INodeRepresentationDelegate representationDelegate  = mainView;
         INodeDelegate nodeDelegate                          = masterViewController;
         INodeHandlerDelegate handlerDelegate                = masterViewController;
+        
         representationDelegate.reloadData(null);
+        
         masterViewController.setMasterController(masterController);
         masterViewController.setNodeRepresentationDelegate(representationDelegate);
         masterViewController.setGravityServiceDelegate(serviceDelegate);
         masterViewController.setWheatherServiceDelegate(wheatherServiceDelegate);
+        
         mainView.setNodeHandlerDelegate(handlerDelegate);
         mainView.setMasterViewController(masterViewController);
         mainView.setNodeDelegate(nodeDelegate);
