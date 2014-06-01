@@ -17,8 +17,8 @@ import cb.cmap.lib.CBRoute;
 import cb.cmap.lib.CBStreetView;
 import cb.cmap.viewcontrollers.MainView;
 import cb.cmap.viewcontrollers.SplashView;
-import cb.map.services.GravityMethodService;
-import cb.map.services.WeatherService;
+import cb.cmap.services.GravityMethodService;
+import cb.cmap.services.WeatherService;
 import java.util.ArrayList;
 import java.util.List;
 

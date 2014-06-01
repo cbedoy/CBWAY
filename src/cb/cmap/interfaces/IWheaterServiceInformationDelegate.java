@@ -17,6 +17,6 @@ import java.util.HashMap;
 
 public interface IWheaterServiceInformationDelegate {
 
-    public HashMap<String, Object> getData();
+    public HashMap<String, Object> getDataModel();
     
 }

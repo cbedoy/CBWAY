@@ -1,4 +1,4 @@
-package cb.map.services;
+package cb.cmap.services;
 
 import java.io.BufferedReader;
 import java.io.IOException;

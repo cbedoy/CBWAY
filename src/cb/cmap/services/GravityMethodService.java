@@ -1,4 +1,4 @@
-package cb.map.services;
+package cb.cmap.services;
 
 
 import cb.cmap.interfaces.IGravityServiceDelegate;
@@ -23,22 +23,22 @@ public class GravityMethodService implements IGravityServiceDelegate{
     
     private void calculateSummation() {
         for(Object information : dataModel){
-            HashMap<String, Object> data = (HashMap<String, Object>) information;
-            totalCost += ((Double)data.get("cost"));
+            HashMap<String, Object> data    = (HashMap<String, Object>) information;
+            totalCost                       += ((Double)data.get("cost"));
         }
     }
 
     private void calculateGravityY() {
         for(Object information : dataModel){
-            HashMap<String, Object> data = (HashMap<String, Object>) information;
-            gravityY += ((Double)data.get("length")) * ((Double)data.get("cost"));
+            HashMap<String, Object> data    = (HashMap<String, Object>) information;
+            gravityY                        += ((Double)data.get("length")) * ((Double)data.get("cost"));
         }
     }
 
     private void calculateGravityX() {
         for(Object information : dataModel){
-            HashMap<String, Object> data = (HashMap<String, Object>) information;
-            gravityX += ((Double)data.get("latitude")) * ((Double)data.get("cost"));
+            HashMap<String, Object> data    = (HashMap<String, Object>) information;
+            gravityX                        += ((Double)data.get("latitude")) * ((Double)data.get("cost"));
         }
     }
 

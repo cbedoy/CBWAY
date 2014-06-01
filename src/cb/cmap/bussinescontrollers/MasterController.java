@@ -6,7 +6,7 @@ import cb.cmap.lib.CBGeocoding;
 import cb.cmap.lib.CBPlaces;
 import cb.cmap.lib.CBRoute;
 import cb.cmap.lib.CBStreetView;
-import cb.map.services.GravityMethodService;
+import cb.cmap.services.GravityMethodService;
 import java.awt.geom.Point2D;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
