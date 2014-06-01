@@ -74,6 +74,8 @@ public class OpenWeatherService{
             HashMap<String, Object> dataModel   = new HashMap<String, Object>();
             dataModel.put("id", id);
             dataModel.put("dt", dt);
+            dataModel.put("latitude", latitude);
+            dataModel.put("length", lenght);
             dataModel.put("name", name);
             dataModel.put("code", code);
             dataModel.put("message", message);
@@ -93,33 +95,9 @@ public class OpenWeatherService{
             dataModel.put("main_weather", main_weather);
             dataModel.put("description_weather", description_weather);
             
-            
         } catch (MalformedURLException ex) {
-            
         } catch (IOException ex) {
-           
         }
         
     }
-    
-    /*
-    
- 
-
-    "weather": [
-        {
-            "id": 500,
-            "main": "Rain",
-            "description": "light rain",
-            "icon": "10n"
-        },
-        {
-            "id": 301,
-            "main": "Drizzle",
-            "description": "drizzle",
-            "icon": "09n"
-        }
-    ],
-
-    */
 }
