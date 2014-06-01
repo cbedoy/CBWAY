@@ -110,7 +110,7 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
         ));
         jScrollPane1.setViewportView(dataCenter);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cb/maps/assets/icon.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cb/cmap/assets/icon.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -120,7 +120,7 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
