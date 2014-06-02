@@ -65,6 +65,7 @@ public class WeatherService implements IWheaterServiceDelegate, IWheaterServiceI
             response                = bufferedReader.readLine();
             objectParsed            = jsonParser.parse(response);
             jsonObject              = (JSONObject)objectParsed;
+            dataModel.clear();
             parseDataModel(jsonObject);
         } catch (MalformedURLException  ex) {
             
@@ -156,5 +157,5 @@ public class WeatherService implements IWheaterServiceDelegate, IWheaterServiceI
     public HashMap<String, Object> getDataModel() {
         return dataModel;
     }
-
+    
 }

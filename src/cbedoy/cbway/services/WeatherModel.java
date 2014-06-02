@@ -17,77 +17,78 @@ import java.util.HashMap;
 
 public class WeatherModel {
     
-    private final HashMap<String, Object> dataModel;
+    private HashMap<String, Object> dataModel;
     
     public WeatherModel(HashMap<String, Object> dataModel){
         this.dataModel = dataModel;
     }
 
-    private Object getId(){
+    public Object getId(){
+        System.out.println(dataModel.get("id"));
         return dataModel.get("id");
     }
     
-    private Object getDt(){
+    public Object getDt(){
         return dataModel.get("dt");
     }
     
-    private Object getLatitude(){
+    public Object getLatitude(){
         return this.dataModel.get("latitude");
     }
     
-    private Object getLength(){
+    public Object getLength(){
         return this.dataModel.get("length");
     }
     
-    private Object getName(){
+    public Object getName(){
         return this.dataModel.get("name");
     }
     
-    private Object getCode(){
+    public Object getCode(){
         return this.dataModel.get("code");
     }
     
-    private Object getMessage(){
+    public Object getMessage(){
         return this.dataModel.get("message");
     }
     
-    private Object getCountry(){
+    public Object getCountry(){
         return this.dataModel.get("country");
     }
     
-    private Object getSunrise(){
+    public Object getSunrise(){
         return this.dataModel.get("sunrise");
     }
     
-    private Object getSunset(){
+    public Object getSunset(){
         return this.dataModel.get("sunset");
     }
     
-    private Object getTemp(){
+    public Object getTemp(){
         return this.dataModel.get("temp");
     }
     
-    private Object getPressure(){
+    public Object getPressure(){
         return this.dataModel.get("pressure");
     }
     
-    private Object getHumidity(){
+    public Object getHumidity(){
         return this.dataModel.get("humidity");
     }
     
-    private Object getTempMax(){
+    public Object getTempMax(){
         return this.dataModel.get("temp_max");
     }
     
-    private Object getTempMin(){
+    public Object getTempMin(){
         return this.dataModel.get("temp_min");
     }
     
-    private Object getSpeed(){
+    public Object getSpeed(){
         return this.dataModel.get("speed");
     }
     
-    private Object getDeg(){
+    public Object getDeg(){
         return this.dataModel.get("deg");
     }
 }

@@ -20,5 +20,5 @@ public interface IWheaterServiceDelegate {
     public void requestWithCordinates(double latitude, double length);
     
     public void requestWithCountryCity(String country, String city);
-    
+        
 }
