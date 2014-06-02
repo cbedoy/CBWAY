@@ -13,9 +13,16 @@ import cbedoy.cbway.interfaces.INodeHandlerDelegate;
 import cbedoy.cbway.interfaces.INodeRepresentationDelegate;
 import cbedoy.cbway.interfaces.IViewDelegate;
 import cbedoy.cbway.interfaces.IWheaterServiceInformationDelegate;
+import cbedoy.cbway.services.BrowserService;
+import cbedoy.cbway.services.DecoratorService;
 import cbedoy.cbway.services.WeatherKeySet;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -85,6 +92,7 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
         jScrollPane1 = new javax.swing.JScrollPane();
         dataCenter = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
+        showMapAction = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -204,7 +212,7 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
         lenght_view.setForeground(new java.awt.Color(224, 224, 224));
         lenght_view.setText("jLabel3");
 
-        country_view.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        country_view.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         country_view.setForeground(new java.awt.Color(224, 224, 224));
         country_view.setText("jLabel3");
 
@@ -275,6 +283,16 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Demo V 0.8 CBWAYLib");
 
+        showMapAction.setBackground(new java.awt.Color(255, 255, 255));
+        showMapAction.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        showMapAction.setForeground(new java.awt.Color(0, 102, 102));
+        showMapAction.setText("Show in map");
+        showMapAction.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showMapActionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -283,13 +301,17 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addContainerGap()))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(showMapAction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -305,7 +327,9 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(43, 43, 43)
+                        .addGap(9, 9, 9)
+                        .addComponent(showMapAction)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)))
                 .addContainerGap())
         );
@@ -314,14 +338,19 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-
-        String country                                  = sName.getText();
-        String city                                     = sCity.getText();
-        Double cost                                     = Double.parseDouble(sCost.getText());
-        nodeDelegate.userSelectedCountryWithCost(country+" "+city, cost);
-        sName.setText(null);
-        sCost.setText(null);
-        nodeHandlerDelegate.userRequestInformationTable();
+        try{
+            String country                                  = sName.getText();
+            String city                                     = sCity.getText();
+            Double cost                                     = Double.parseDouble(sCost.getText());
+            nodeDelegate.userSelectedCountryWithCost(country+" "+city, cost);
+            sName.setText(null);
+            sCost.setText(null);
+            sCity.setText(null);
+            nodeHandlerDelegate.userRequestInformationTable();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Error", "Invalid data", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void actionSolveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionSolveActionPerformed
@@ -334,6 +363,17 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     private void sNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sNameActionPerformed
+
+    private void showMapActionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMapActionActionPerformed
+        try {
+            // TODO add your handling code here:
+            Double positionX = Double.parseDouble(latitude_view.getText());
+            Double positionY = Double.parseDouble(lenght_view.getText());
+            BrowserService.getInstance().openWebPage(positionX, positionY, 16);
+        } catch (URISyntaxException | IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error", "Invalid url", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_showMapActionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -392,6 +432,7 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     private javax.swing.JTextField sCost;
     private javax.swing.JTextField sName;
     private javax.swing.JLabel sPositionX;
+    private javax.swing.JButton showMapAction;
     private javax.swing.JLabel state_view;
     // End of variables declaration//GEN-END:variables
 
@@ -404,7 +445,7 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     public void reloadData(HashMap<String, Object> dataModel) {
         
         if(dataModel != null){
-            country_view        .setText(dataModel.get("country").toString());
+            country_view        .setText(dataModel.get("country").toString().length()>35?dataModel.get("country").toString().substring(0, 35):dataModel.get("country").toString());
             city_view           .setText(dataModel.get("city").toString());
             delegation_view     .setText(dataModel.get("delegation").toString());
             state_view          .setText(dataModel.get("state").toString());
@@ -435,8 +476,8 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
             dataModel.get(WeatherKeySet.HUMIDITY),
             dataModel.get(WeatherKeySet.PRESURE),
             dataModel.get(WeatherKeySet.SPEED),
-            dataModel.get(WeatherKeySet.SUNRISE),
-            dataModel.get(WeatherKeySet.SUNSET)
+            DecoratorService.getInstance().getDateFormated((long) dataModel.get(WeatherKeySet.SUNRISE)),
+            DecoratorService.getInstance().getDateFormated((long) dataModel.get(WeatherKeySet.SUNSET))
         };
         defaultTableModel.addRow(row);
     }

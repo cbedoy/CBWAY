@@ -129,4 +129,9 @@ public class MasterViewController implements INodeHandlerDelegate, INodeDelegate
     public void setWheatherServiceInformationDelegate(IWheaterServiceInformationDelegate wheatherServiceInformationDelegate) {
         this.wheatherServiceInformationDelegate = wheatherServiceInformationDelegate;
     }
+
+    @Override
+    public void userRequestMap() {
+        
+    }
 }

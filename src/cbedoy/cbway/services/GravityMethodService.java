@@ -29,22 +29,22 @@ public class GravityMethodService implements IGravityServiceDelegate{
     
     private void calculateSummation() {
         for(Object information : dataModel){
-            HashMap<String, Object> data    = (HashMap<String, Object>) information;
-            totalCost                       += ((Double)data.get("cost"));  
+            HashMap<WeatherKeySet, Object> data    = (HashMap<WeatherKeySet, Object>) information;
+            totalCost                       += ((Double)data.get(WeatherKeySet.COST));  
         }
     }
 
     private void calculateGravityY() {
         for(Object information : dataModel){
-            HashMap<String, Object> data    = (HashMap<String, Object>) information;
-            gravityY                        += ((Double)data.get("length")) * ((Double)data.get("cost"));
+            HashMap<WeatherKeySet, Object> data    = (HashMap<WeatherKeySet, Object>) information;
+            gravityY                        += ((Double)data.get(WeatherKeySet.LENGTH)) * ((Double)data.get(WeatherKeySet.COST));
         }
     }
 
     private void calculateGravityX() {
         for(Object information : dataModel){
-            HashMap<String, Object> data    = (HashMap<String, Object>) information;
-            gravityX                        += ((Double)data.get("latitude")) * ((Double)data.get("cost"));
+            HashMap<WeatherKeySet, Object> data    = (HashMap<WeatherKeySet, Object>) information;
+            gravityX                        += ((Double)data.get(WeatherKeySet.LATITUDE)) * ((Double)data.get(WeatherKeySet.COST));
         }
     }
 

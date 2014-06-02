@@ -3,6 +3,7 @@ package cbedoy.cbway.services;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  *
@@ -18,6 +19,9 @@ import java.net.URI;
  */
 
 public class BrowserService {
+    
+    private final String url = "https://www.google.com.mx/maps/@";
+    private StringBuilder urlBuilder;
     private static BrowserService browserService;
     
     public static BrowserService getInstance(){
@@ -26,14 +30,18 @@ public class BrowserService {
         return browserService;
     }
     
-    public void openWebPage(URI uri){
+    private BrowserService(){
+        urlBuilder = new StringBuilder(url);
+    } 
+    
+    public void openWebPage(double latitude, double lenght, int zoom) throws URISyntaxException, IOException{
+        urlBuilder.append(latitude).append(",");
+        urlBuilder.append(lenght).append(",");
+        urlBuilder.append(zoom).append("z");
         Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
         if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-            try {
-                desktop.browse(uri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                desktop.browse(new URI(urlBuilder.toString()));
         }
+        urlBuilder = new StringBuilder(url);
     }
 }

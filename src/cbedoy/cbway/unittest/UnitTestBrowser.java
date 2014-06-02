@@ -1,6 +1,7 @@
 package cbedoy.cbway.unittest;
 
 import cbedoy.cbway.services.BrowserService;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -18,8 +19,8 @@ import java.net.URISyntaxException;
  */
 
 public class UnitTestBrowser {
-    public static void main(String[]cbedoy) throws URISyntaxException{
+    public static void main(String[]cbedoy) throws URISyntaxException, IOException{
         URI uri = new URI("www.facebook.com");
-        BrowserService.getInstance().openWebPage(uri);
+        BrowserService.getInstance().openWebPage(30L,30L,22);
     }
 }

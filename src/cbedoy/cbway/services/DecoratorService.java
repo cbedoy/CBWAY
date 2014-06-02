@@ -1,6 +1,7 @@
 package cbedoy.cbway.services;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -27,6 +28,8 @@ public class DecoratorService {
     
     public String getDateFormated(long time){
         Date date = new Date(time);
-        return date.toGMTString();
+        System.out.println(date.toString());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+        return simpleDateFormat.format(date);
     }
 }

@@ -16,4 +16,5 @@ package cbedoy.cbway.interfaces;
 public interface INodeHandlerDelegate {
     public void userRequestSolution();
     public void userRequestInformationTable();
+    public void userRequestMap();
 }

@@ -74,21 +74,7 @@ public class WeatherService implements IWheaterServiceDelegate, IWheaterServiceI
         JSONObject sys                      = (JSONObject)object.get("sys");
         JSONObject main                     = (JSONObject)object.get("main");
         JSONObject wind                     = (JSONObject)object.get("wind");
-        JSONObject rain                     = (JSONObject)object.get("rain");
-        JSONArray weather                   = (JSONArray)object.get("weather");
         
-        for(Object objects : weather){
-            HashMap<String, Object> information = (HashMap<String, Object>) objects;
-            Object id_weather                   = information.get(0);
-            Object icon_weather                 = information.get(1);
-            Object description_weather          = information.get(2);
-            Object main_weather                 = information.get(3);
-            dataModel.put(WeatherKeySet.IC_, id_weather);
-            dataModel.put(WeatherKeySet.ICON, icon_weather);
-            dataModel.put(WeatherKeySet.MAIN, main_weather);
-            dataModel.put(WeatherKeySet.DESCRIPTION, description_weather);
-        }
-           
         Object id                           = object.get("id");
         Object dt                           = object.get("dt");
         Object name                         = object.get("name");
