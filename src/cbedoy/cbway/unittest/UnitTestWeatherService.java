@@ -1,4 +1,4 @@
-package cbedoy.cbway.main;
+package cbedoy.cbway.unittest;
 
 import cbedoy.cbway.lib.CBGeocoding;
 import cbedoy.cbway.services.GravityMethodService;
