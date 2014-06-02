@@ -35,21 +35,20 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
         setLocationRelativeTo(null);
         defaultTableModel = new DefaultTableModel();
         defaultTableModel.setColumnIdentifiers(new Object[]{
-            WeatherKeySet.CODE,
             WeatherKeySet.COUNTRY,
-            WeatherKeySet.DESCRIPTION,
-            WeatherKeySet.DG,
-            WeatherKeySet.DT,
-            WeatherKeySet.HUMIDITY,
-            WeatherKeySet.ICON,
             WeatherKeySet.LATITUDE,
             WeatherKeySet.LENGTH,
+            WeatherKeySet.COST,
             WeatherKeySet.MESSAGE,
-            WeatherKeySet.PRESURE,
-            WeatherKeySet.SPEED,
             WeatherKeySet.TEMP,
             WeatherKeySet.TEMP_MAX,
             WeatherKeySet.TEMP_MIN,
+            WeatherKeySet.HUMIDITY,
+            WeatherKeySet.PRESURE,
+            WeatherKeySet.SPEED,
+            WeatherKeySet.SUNRISE,
+            WeatherKeySet.SUNSET
+            
             
         });
         dataCenter.setModel(defaultTableModel);
@@ -423,12 +422,21 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     }
 
     @Override
-    public void reloadTable(HashMap<String, Object> dataModel) {
+    public void reloadTable(HashMap<WeatherKeySet, Object> dataModel) {
         Object[] row = new Object[]{
-            dataModel.get("name"),
-            dataModel.get("latitude"),
-            dataModel.get("length"),
-            dataModel.get("cost")
+            dataModel.get(WeatherKeySet.COUNTRY),
+            dataModel.get(WeatherKeySet.LATITUDE),
+            dataModel.get(WeatherKeySet.LENGTH),
+            dataModel.get(WeatherKeySet.COST),
+            dataModel.get(WeatherKeySet.MESSAGE),
+            dataModel.get(WeatherKeySet.TEMP),
+            dataModel.get(WeatherKeySet.TEMP_MAX),
+            dataModel.get(WeatherKeySet.TEMP_MIN),
+            dataModel.get(WeatherKeySet.HUMIDITY),
+            dataModel.get(WeatherKeySet.PRESURE),
+            dataModel.get(WeatherKeySet.SPEED),
+            dataModel.get(WeatherKeySet.SUNRISE),
+            dataModel.get(WeatherKeySet.SUNSET)
         };
         defaultTableModel.addRow(row);
     }
@@ -452,7 +460,7 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
 
     @Override
     public void reloadView() {
-        
+        reloadData(null);
     }
 
     @Override
