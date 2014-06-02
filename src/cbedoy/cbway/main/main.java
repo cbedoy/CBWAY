@@ -79,11 +79,11 @@ public class main {
             masterViewController.setNodeRepresentationDelegate(representationDelegate);
             masterViewController.setGravityServiceDelegate(serviceDelegate);
             masterViewController.setWheatherServiceDelegate(wheatherServiceDelegate);
-            
+            masterViewController.setWheatherServiceInformationDelegate(wheatherInformationDelegate);
             mainView.setNodeHandlerDelegate(handlerDelegate);
             mainView.setMasterViewController(masterViewController);
             mainView.setNodeDelegate(nodeDelegate);
-            mainView.setWheatherServiceInformationDelegate(wheatherInformationDelegate);
+            
             Thread.sleep(1000);
             
             viewDelegateSplash.hideView();

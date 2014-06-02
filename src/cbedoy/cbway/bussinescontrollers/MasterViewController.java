@@ -5,7 +5,9 @@ import cbedoy.cbway.interfaces.INodeDelegate;
 import cbedoy.cbway.interfaces.INodeHandlerDelegate;
 import cbedoy.cbway.interfaces.INodeRepresentationDelegate;
 import cbedoy.cbway.interfaces.IWheaterServiceDelegate;
+import cbedoy.cbway.interfaces.IWheaterServiceInformationDelegate;
 import cbedoy.cbway.lib.CBGeocoding;
+import cbedoy.cbway.services.WeatherKeySet;
 import java.awt.geom.Point2D;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -28,12 +30,12 @@ import java.util.List;
 
 public class MasterViewController implements INodeHandlerDelegate, INodeDelegate{
     
-    private MasterController            masterController;
-    private static MasterViewController masterViewController;
-    private INodeRepresentationDelegate nodeRepresentationDelegate;
-    private IGravityServiceDelegate     gravityServiceDelegate;
-    private IWheaterServiceDelegate     wheatherServiceDelegate;
-    
+    private MasterController                    masterController;
+    private static MasterViewController         masterViewController;
+    private INodeRepresentationDelegate         nodeRepresentationDelegate;
+    private IGravityServiceDelegate             gravityServiceDelegate;
+    private IWheaterServiceDelegate             wheatherServiceDelegate;
+    private IWheaterServiceInformationDelegate  wheatherServiceInformationDelegate;
     public static MasterViewController getInstance(){
         if(masterViewController == null)
             masterViewController = new MasterViewController();
@@ -88,20 +90,31 @@ public class MasterViewController implements INodeHandlerDelegate, INodeDelegate
     public void userRequestInformationTable() {
         List<Object> dataModel          = masterController.getDataModel();
         Object lastRow                  = dataModel.get(dataModel.size()-1);
-        nodeRepresentationDelegate.reloadTable((HashMap<String, Object>) lastRow);
+        nodeRepresentationDelegate.reloadTable((HashMap<WeatherKeySet, Object>) lastRow);
     }
 
     @Override
     public void userSelectedCountryWithCost(String country, Double cost) {
         try {
-            List<Object> dataModel          = masterController.getDataModel();
-            HashMap<String, Object> data    = new HashMap<String, Object>();
-            CBGeocoding geocoding           = masterController.getGeocoding();
-            Point2D.Double coordinates      = geocoding.getCoordinates(country);
-            data.put("name", country);
-            data.put("latitude", coordinates.getX());
-            data.put("length", coordinates.getY());
-            data.put("cost", cost);
+            List<Object> dataModel                              = masterController.getDataModel();
+            HashMap<WeatherKeySet, Object> data                 = new HashMap<WeatherKeySet, Object>();
+            CBGeocoding geocoding                               = masterController.getGeocoding();
+            Point2D.Double coordinates                          = geocoding.getCoordinates(country);
+            wheatherServiceDelegate.requestWithCordinates(coordinates.x, coordinates.y);
+            HashMap<WeatherKeySet, Object> serviceInformation   = wheatherServiceInformationDelegate.getDataModel();
+            data.put(WeatherKeySet.COUNTRY,     country);
+            data.put(WeatherKeySet.LATITUDE,    coordinates.getX());
+            data.put(WeatherKeySet.LENGTH,      coordinates.getY());
+            data.put(WeatherKeySet.COST,        cost);
+            data.put(WeatherKeySet.MESSAGE,     serviceInformation.get(WeatherKeySet.MESSAGE));
+            data.put(WeatherKeySet.TEMP,        serviceInformation.get(WeatherKeySet.TEMP));
+            data.put(WeatherKeySet.TEMP_MAX,    serviceInformation.get(WeatherKeySet.TEMP_MAX));
+            data.put(WeatherKeySet.TEMP_MIN,    serviceInformation.get(WeatherKeySet.TEMP_MIN));
+            data.put(WeatherKeySet.HUMIDITY,    serviceInformation.get(WeatherKeySet.HUMIDITY));
+            data.put(WeatherKeySet.PRESURE,     serviceInformation.get(WeatherKeySet.PRESURE));
+            data.put(WeatherKeySet.SPEED,       serviceInformation.get(WeatherKeySet.SPEED));
+            data.put(WeatherKeySet.SUNRISE,     serviceInformation.get(WeatherKeySet.SUNRISE));
+            data.put(WeatherKeySet.SUNSET,      serviceInformation.get(WeatherKeySet.SUNSET));
             dataModel.add(data);
             masterController.setDataModel(dataModel);
         } catch (UnsupportedEncodingException | MalformedURLException ex) {
@@ -111,5 +124,9 @@ public class MasterViewController implements INodeHandlerDelegate, INodeDelegate
 
     public void setWheatherServiceDelegate(IWheaterServiceDelegate wheatherServiceDelegate) {
         this.wheatherServiceDelegate = wheatherServiceDelegate;
+    }
+
+    public void setWheatherServiceInformationDelegate(IWheaterServiceInformationDelegate wheatherServiceInformationDelegate) {
+        this.wheatherServiceInformationDelegate = wheatherServiceInformationDelegate;
     }
 }

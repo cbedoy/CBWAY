@@ -34,5 +34,6 @@ public enum WeatherKeySet {
     IC_,
     ICON,
     MAIN,
-    DESCRIPTION
+    DESCRIPTION, 
+    COST
 }

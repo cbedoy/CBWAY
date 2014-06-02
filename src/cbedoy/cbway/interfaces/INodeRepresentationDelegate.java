@@ -1,5 +1,6 @@
 package cbedoy.cbway.interfaces;
 
+import cbedoy.cbway.services.WeatherKeySet;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,6 +20,6 @@ import java.util.List;
 public interface INodeRepresentationDelegate {
 
     public void reloadData(HashMap<String, Object> dataModel);
-    public void reloadTable(HashMap<String, Object> dataModel);
+    public void reloadTable(HashMap<WeatherKeySet, Object> dataModel);
     
 }

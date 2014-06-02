@@ -27,7 +27,6 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     private MasterViewController                masterViewController;
     private INodeHandlerDelegate                nodeHandlerDelegate;
     private INodeDelegate                       nodeDelegate;
-    private IWheaterServiceInformationDelegate  wheatherServiceInformationDelegate;
     
     public MainView() {
         initComponents();
@@ -35,21 +34,20 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
         setLocationRelativeTo(null);
         defaultTableModel = new DefaultTableModel();
         defaultTableModel.setColumnIdentifiers(new Object[]{
-            WeatherKeySet.CODE,
             WeatherKeySet.COUNTRY,
-            WeatherKeySet.DESCRIPTION,
-            WeatherKeySet.DG,
-            WeatherKeySet.DT,
-            WeatherKeySet.HUMIDITY,
-            WeatherKeySet.ICON,
             WeatherKeySet.LATITUDE,
             WeatherKeySet.LENGTH,
+            WeatherKeySet.COST,
             WeatherKeySet.MESSAGE,
-            WeatherKeySet.PRESURE,
-            WeatherKeySet.SPEED,
             WeatherKeySet.TEMP,
             WeatherKeySet.TEMP_MAX,
             WeatherKeySet.TEMP_MIN,
+            WeatherKeySet.HUMIDITY,
+            WeatherKeySet.PRESURE,
+            WeatherKeySet.SPEED,
+            WeatherKeySet.SUNRISE,
+            WeatherKeySet.SUNSET
+            
             
         });
         dataCenter.setModel(defaultTableModel);
@@ -75,7 +73,7 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        sCost1 = new javax.swing.JTextField();
+        sCity = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         sPositionX = new javax.swing.JLabel();
         latitude_view = new javax.swing.JLabel();
@@ -167,7 +165,7 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(sCost1)
+                    .addComponent(sCity)
                     .addComponent(addButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(actionSolve, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -182,7 +180,7 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sCost1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -318,8 +316,9 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
 
         String country                                  = sName.getText();
+        String city                                     = sCity.getText();
         Double cost                                     = Double.parseDouble(sCost.getText());
-        nodeDelegate.userSelectedCountryWithCost(country, cost);
+        nodeDelegate.userSelectedCountryWithCost(country+" "+city, cost);
         sName.setText(null);
         sCost.setText(null);
         nodeHandlerDelegate.userRequestInformationTable();
@@ -389,8 +388,8 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel latitude_view;
     private javax.swing.JLabel lenght_view;
+    private javax.swing.JTextField sCity;
     private javax.swing.JTextField sCost;
-    private javax.swing.JTextField sCost1;
     private javax.swing.JTextField sName;
     private javax.swing.JLabel sPositionX;
     private javax.swing.JLabel state_view;
@@ -423,12 +422,21 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     }
 
     @Override
-    public void reloadTable(HashMap<String, Object> dataModel) {
+    public void reloadTable(HashMap<WeatherKeySet, Object> dataModel) {
         Object[] row = new Object[]{
-            dataModel.get("name"),
-            dataModel.get("latitude"),
-            dataModel.get("length"),
-            dataModel.get("cost")
+            dataModel.get(WeatherKeySet.COUNTRY),
+            dataModel.get(WeatherKeySet.LATITUDE),
+            dataModel.get(WeatherKeySet.LENGTH),
+            dataModel.get(WeatherKeySet.COST),
+            dataModel.get(WeatherKeySet.MESSAGE),
+            dataModel.get(WeatherKeySet.TEMP),
+            dataModel.get(WeatherKeySet.TEMP_MAX),
+            dataModel.get(WeatherKeySet.TEMP_MIN),
+            dataModel.get(WeatherKeySet.HUMIDITY),
+            dataModel.get(WeatherKeySet.PRESURE),
+            dataModel.get(WeatherKeySet.SPEED),
+            dataModel.get(WeatherKeySet.SUNRISE),
+            dataModel.get(WeatherKeySet.SUNSET)
         };
         defaultTableModel.addRow(row);
     }
@@ -441,10 +449,6 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
         this.nodeDelegate = nodeDelegate;
     }
 
-    public void setWheatherServiceInformationDelegate(IWheaterServiceInformationDelegate wheatherServiceInformationDelegate) {
-        this.wheatherServiceInformationDelegate = wheatherServiceInformationDelegate;
-    }
-
     @Override
     public void hideView() {
         setVisible(false);
@@ -452,7 +456,7 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
 
     @Override
     public void reloadView() {
-        
+        reloadData(null);
     }
 
     @Override
