@@ -28,14 +28,14 @@ public class OpenWeatherService{
        GravityMethodService gravity         = GravityMethodService.getInstance();
        CBGeocoding geocoding                = new CBGeocoding();
        String[] countries                   = new String[]{"mexico", "brazil", "argentina", "españa"};
-       List<Object> wheatherList            = new ArrayList<Object>();
+       HashMap<Object, Object> wheatherData = new HashMap<Object, Object>();
         try {
             
            for(String country : countries){
                 Point2D.Double coordinates  = geocoding.getCoordinates(country);
                 service.requestWithCordinates(coordinates.getX(), coordinates.getY());
                 HashMap<WeatherKeySet, Object> information = service.getDataModel();    
-                wheatherList.add(information);
+                wheatherData.put(information.get(WeatherKeySet.NAME), information);
            }
            
            
@@ -44,11 +44,7 @@ public class OpenWeatherService{
 
         }       
         
-        for(Object data : wheatherList){
-            HashMap<WeatherKeySet, Object> info = (HashMap<WeatherKeySet, Object>) data;
-            System.out.println(info.get(WeatherKeySet.CODE));
-            
-        }
+        System.out.println(wheatherData);
         
        long time_end = System.currentTimeMillis();
 

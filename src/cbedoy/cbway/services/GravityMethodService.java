@@ -30,7 +30,7 @@ public class GravityMethodService implements IGravityServiceDelegate{
     private void calculateSummation() {
         for(Object information : dataModel){
             HashMap<String, Object> data    = (HashMap<String, Object>) information;
-            totalCost                       += ((Double)data.get("cost"));
+            totalCost                       += ((Double)data.get("cost"));  
         }
     }
 
