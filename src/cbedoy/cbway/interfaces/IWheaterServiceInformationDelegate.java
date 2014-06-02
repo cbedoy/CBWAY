@@ -1,5 +1,6 @@
 package cbedoy.cbway.interfaces;
 
+import cbedoy.cbway.services.WeatherKeySet;
 import java.util.HashMap;
 
 /**
@@ -17,6 +18,6 @@ import java.util.HashMap;
 
 public interface IWheaterServiceInformationDelegate {
 
-    public HashMap<String, Object> getDataModel();
+    public HashMap<WeatherKeySet, Object> getDataModel();
     
 }
