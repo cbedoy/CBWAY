@@ -9,13 +9,19 @@ import java.util.List;
  * Created by Carlos on 11/05/2014.
  */
 public class GravityMethodService implements IGravityServiceDelegate{
-
+    private static GravityMethodService gravityMethodService;
     private List<Object>     dataModel;
     private double           totalCost;
     private double           gravityX;
     private double           gravityY;
+    
+    public static GravityMethodService getInstance(){
+        if(gravityMethodService == null)
+            gravityMethodService = new GravityMethodService();
+        return gravityMethodService;
+    }
 
-    public GravityMethodService(){
+    private GravityMethodService(){
         totalCost           = 0;
         gravityX            = 0;
         gravityY            = 0;

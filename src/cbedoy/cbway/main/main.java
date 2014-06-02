@@ -46,7 +46,7 @@ public class main {
             
         IViewDelegate viewDelegate                                      = splash;
         MasterController masterController                               = MasterController.getInstanse();
-        GravityMethodService gravityMethodService                       = new GravityMethodService();
+        GravityMethodService gravityMethodService                       = GravityMethodService.getInstance();
         List<Object> dataModel                                          = new ArrayList<Object>();
         
         IMapDelegate    elevationDelegate                               = new CBElevation();

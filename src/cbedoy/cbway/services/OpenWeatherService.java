@@ -1,15 +1,10 @@
 package cbedoy.cbway.services;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import cbedoy.cbway.lib.CBGeocoding;
+import java.awt.geom.Point2D;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
-import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 /**
  *
@@ -27,7 +22,18 @@ import org.json.simple.parser.ParseException;
 public class OpenWeatherService{
     public static void main(String[]cbedoy) throws ParseException{
        WeatherService service = WeatherService.getInstance();
-       service.requestWithCity("rusia");
+       GravityMethodService gravity = GravityMethodService.getInstance();
+       CBGeocoding geocoding = new CBGeocoding();
+        try {
+           Point2D.Double coordinates = geocoding.getCoordinates("durango");
+           service.requestWithCordinates(coordinates.getX(), coordinates.getY());
+           HashMap<String, Object> dataModel = service.getDataModel();
+           for(String key: dataModel.keySet())
+               System.out.println(key+" -> "+dataModel.get(key));
+           
+        } catch (UnsupportedEncodingException | MalformedURLException ex) {
+
+        }
        System.out.println(service.getDataModel().keySet().size());
         
     }

@@ -116,7 +116,6 @@ public class WeatherService implements IWheaterServiceDelegate, IWheaterServiceI
         Object speed                        = wind.get("speed");
         Object deg                          = wind.get("deg");      
             
-        Object rains                        = rain.get("1h");
             
         dataModel.put("id", id);
         dataModel.put("dt", dt);
@@ -135,7 +134,6 @@ public class WeatherService implements IWheaterServiceDelegate, IWheaterServiceI
         dataModel.put("temp_min", temp_min);
         dataModel.put("speed", speed);
         dataModel.put("deg", deg);
-        dataModel.put("rains", rains);
         
     }    
     
