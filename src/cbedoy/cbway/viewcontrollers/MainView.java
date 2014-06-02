@@ -27,7 +27,6 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     private MasterViewController                masterViewController;
     private INodeHandlerDelegate                nodeHandlerDelegate;
     private INodeDelegate                       nodeDelegate;
-    private IWheaterServiceInformationDelegate  wheatherServiceInformationDelegate;
     
     public MainView() {
         initComponents();
@@ -447,10 +446,6 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
 
     public void setNodeDelegate(INodeDelegate nodeDelegate) {
         this.nodeDelegate = nodeDelegate;
-    }
-
-    public void setWheatherServiceInformationDelegate(IWheaterServiceInformationDelegate wheatherServiceInformationDelegate) {
-        this.wheatherServiceInformationDelegate = wheatherServiceInformationDelegate;
     }
 
     @Override
