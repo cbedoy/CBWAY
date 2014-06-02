@@ -21,6 +21,8 @@ import cbedoy.cbway.services.GravityMethodService;
 import cbedoy.cbway.services.WeatherService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -37,54 +39,59 @@ import java.util.List;
 
 public class main {
     public static void main(String[]cbedoy){
-        long time_start = System.currentTimeMillis();
-        
-        WeatherService wheatherService                                  = WeatherService.getInstance();
-        IWheaterServiceDelegate wheatherServiceDelegate                 = wheatherService;
-        IWheaterServiceInformationDelegate wheatherInformationDelegate  = wheatherService;       
-        SplashView splash                                               = new SplashView();
+        try {
+            long time_start = System.currentTimeMillis();
+            SplashView splash                                               = new SplashView();
+            IViewDelegate viewDelegateSplash                                = splash;
+            viewDelegateSplash.showView();
+            WeatherService wheatherService                                  = WeatherService.getInstance();
+            IWheaterServiceDelegate wheatherServiceDelegate                 = wheatherService;
+            IWheaterServiceInformationDelegate wheatherInformationDelegate  = wheatherService;
             
-        IViewDelegate viewDelegate                                      = splash;
-        MasterController masterController                               = MasterController.getInstanse();
-        GravityMethodService gravityMethodService                       = GravityMethodService.getInstance();
-        List<Object> dataModel                                          = new ArrayList<Object>();
-        
-        IMapDelegate    elevationDelegate                               = new CBElevation();
-        IMapDelegate    geocodingDelegate                               = new CBGeocoding();
-        IMapDelegate    placesDelegate                                  = new CBPlaces();
-        IMapDelegate    routeDelegate                                   = new CBRoute();
-        IMapDelegate    streetDelegate                                  = new CBStreetView();
-        
-        
-        masterController.setElevation(new CBElevation());
-        masterController.setGeocoding(new CBGeocoding());
-        masterController.setPlaces(new CBPlaces());
-        masterController.setRoute(new CBRoute());
-        masterController.setStreetView(new CBStreetView());
-        masterController.setGravityService(gravityMethodService);
-        masterController.setDataModel(dataModel);
-        
-        MainView     mainView                               = new MainView();
-        IGravityServiceDelegate serviceDelegate             = gravityMethodService;
-        MasterViewController masterViewController           = MasterViewController.getInstance();
-        INodeRepresentationDelegate representationDelegate  = mainView;
-        INodeDelegate nodeDelegate                          = masterViewController;
-        INodeHandlerDelegate handlerDelegate                = masterViewController;
-        
-        representationDelegate.reloadData(null);
-        
-        masterViewController.setMasterController(masterController);
-        masterViewController.setNodeRepresentationDelegate(representationDelegate);
-        masterViewController.setGravityServiceDelegate(serviceDelegate);
-        masterViewController.setWheatherServiceDelegate(wheatherServiceDelegate);
-        
-        mainView.setNodeHandlerDelegate(handlerDelegate);
-        mainView.setMasterViewController(masterViewController);
-        mainView.setNodeDelegate(nodeDelegate);
-        mainView.setWheatherServiceInformationDelegate(wheatherInformationDelegate);
-        
-        long time_end = System.currentTimeMillis();
-        viewDelegate.hideView();
-        System.out.println(time_end-time_start);
+            MainView mainView                                               = new MainView();
+            IViewDelegate viewDelegateMain                                  = mainView;
+            MasterController masterController                               = MasterController.getInstanse();
+            GravityMethodService gravityMethodService                       = GravityMethodService.getInstance();
+            List<Object> dataModel                                          = new ArrayList<Object>();
+            
+            IMapDelegate    elevationDelegate                               = new CBElevation();
+            IMapDelegate    geocodingDelegate                               = new CBGeocoding();
+            IMapDelegate    placesDelegate                                  = new CBPlaces();
+            IMapDelegate    routeDelegate                                   = new CBRoute();
+            IMapDelegate    streetDelegate                                  = new CBStreetView();
+            
+            IGravityServiceDelegate serviceDelegate                         = gravityMethodService;
+            MasterViewController masterViewController                       = MasterViewController.getInstance();
+            INodeRepresentationDelegate representationDelegate              = mainView;
+            INodeDelegate nodeDelegate                                      = masterViewController;
+            INodeHandlerDelegate handlerDelegate                            = masterViewController;
+            
+            representationDelegate.reloadData(null);
+            masterController.setElevation(new CBElevation());
+            masterController.setGeocoding(new CBGeocoding());
+            masterController.setPlaces(new CBPlaces());
+            masterController.setRoute(new CBRoute());
+            masterController.setStreetView(new CBStreetView());
+            masterController.setGravityService(gravityMethodService);
+            masterController.setDataModel(dataModel);
+            
+            masterViewController.setMasterController(masterController);
+            masterViewController.setNodeRepresentationDelegate(representationDelegate);
+            masterViewController.setGravityServiceDelegate(serviceDelegate);
+            masterViewController.setWheatherServiceDelegate(wheatherServiceDelegate);
+            
+            mainView.setNodeHandlerDelegate(handlerDelegate);
+            mainView.setMasterViewController(masterViewController);
+            mainView.setNodeDelegate(nodeDelegate);
+            mainView.setWheatherServiceInformationDelegate(wheatherInformationDelegate);
+            Thread.sleep(1000);
+            
+            viewDelegateSplash.hideView();
+            viewDelegateMain.showView();
+            long time_end = System.currentTimeMillis();
+            System.out.println(time_end-time_start);
+        } catch (InterruptedException ex) {
+            
+        }
     }
 }

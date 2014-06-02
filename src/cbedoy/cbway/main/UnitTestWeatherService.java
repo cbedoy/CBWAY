@@ -1,6 +1,9 @@
-package cbedoy.cbway.services;
+package cbedoy.cbway.main;
 
 import cbedoy.cbway.lib.CBGeocoding;
+import cbedoy.cbway.services.GravityMethodService;
+import cbedoy.cbway.services.WeatherKeySet;
+import cbedoy.cbway.services.WeatherService;
 import java.awt.geom.Point2D;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -21,7 +24,7 @@ import org.json.simple.parser.ParseException;
  * 27/05/2014 - 10:47:17 PM
  */
 
-public class OpenWeatherService{
+public class UnitTestWeatherService{
     public static void main(String[]cbedoy) throws ParseException{
        long time_start = System.currentTimeMillis(); 
        WeatherService service               = WeatherService.getInstance();

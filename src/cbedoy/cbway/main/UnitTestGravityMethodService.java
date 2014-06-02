@@ -1,5 +1,6 @@
-package cbedoy.cbway.services;
+package cbedoy.cbway.main;
 
+import cbedoy.cbway.services.GravityMethodService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
