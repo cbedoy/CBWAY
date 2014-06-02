@@ -1,4 +1,4 @@
-package cbedoy.cbway.main;
+package cbedoy.cbway.unittest;
 
 import cbedoy.cbway.services.DecoratorService;
 
