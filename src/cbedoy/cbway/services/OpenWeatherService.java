@@ -28,29 +28,28 @@ public class OpenWeatherService{
        GravityMethodService gravity         = GravityMethodService.getInstance();
        CBGeocoding geocoding                = new CBGeocoding();
        String[] countries                   = new String[]{"mexico", "brazil", "argentina", "españa"};
-       List<WeatherModel> wheatherList      = new ArrayList<WeatherModel>();
+       List<Object> wheatherList            = new ArrayList<Object>();
         try {
             
            for(String country : countries){
                 Point2D.Double coordinates  = geocoding.getCoordinates(country);
                 service.requestWithCordinates(coordinates.getX(), coordinates.getY());
-                HashMap<String, Object> information = service.getDataModel();    
-                wheatherList.add(new WeatherModel(information));
+                HashMap<WeatherKeySet, Object> information = service.getDataModel();    
+                wheatherList.add(information);
            }
            
            
            
         } catch (UnsupportedEncodingException | MalformedURLException ex) {
 
+        }       
+        
+        for(Object data : wheatherList){
+            HashMap<WeatherKeySet, Object> info = (HashMap<WeatherKeySet, Object>) data;
+            System.out.println(info.get(WeatherKeySet.CODE));
+            
         }
-       
-        for(WeatherModel object : wheatherList){
-            System.out.println(object.getSunrise());
-            System.out.println(object.getName());
-            System.out.println(object.getMessage());
-        }
-
-       
+        
        long time_end = System.currentTimeMillis();
 
         System.out.println(time_end-time_start);

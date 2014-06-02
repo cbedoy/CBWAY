@@ -29,23 +29,17 @@ import org.json.simple.parser.ParseException;
 
 public class WeatherService implements IWheaterServiceDelegate, IWheaterServiceInformationDelegate{
 
-    private final String            rootURL = "http://api.openweathermap.org/data/2.5/weather?";
-    private URLConnection           urlConnection;
-    private BufferedReader          bufferedReader;
-    private String                  response;
-    private URL                     url;
-    private JSONParser              jsonParser;
-    private HashMap<String, Object> dataModel;
-    private Object                  objectParsed;
-    private JSONObject              jsonObject;
-    private static WeatherService   wheatherService;
-    
-    public enum ServiceOption{
-        CORDINATES, 
-        COUNTRY,
-        COUNTRY_CITY
-    }
-    
+    private final String                    rootURL = "http://api.openweathermap.org/data/2.5/weather?";
+    private URLConnection                   urlConnection;
+    private BufferedReader                  bufferedReader;
+    private String                          response;
+    private URL                             url;
+    private JSONParser                      jsonParser;
+    private HashMap<WeatherKeySet, Object>  dataModel;
+    private Object                          objectParsed;
+    private JSONObject                      jsonObject;
+    private static WeatherService           wheatherService;
+        
     public static WeatherService getInstance(){
         if(wheatherService == null)
             wheatherService = new WeatherService();
@@ -54,7 +48,7 @@ public class WeatherService implements IWheaterServiceDelegate, IWheaterServiceI
     
     private WeatherService(){
         jsonParser                  = new JSONParser();
-        dataModel                   = new HashMap<String, Object>();
+        dataModel                   = new HashMap<WeatherKeySet, Object>();
     }
     
     private void executeRequest(String requestLink){
@@ -89,10 +83,10 @@ public class WeatherService implements IWheaterServiceDelegate, IWheaterServiceI
             Object icon_weather                 = information.get(1);
             Object description_weather          = information.get(2);
             Object main_weather                 = information.get(3);
-            dataModel.put("id_weather", id_weather);
-            dataModel.put("icon_weather", icon_weather);
-            dataModel.put("main_weather", main_weather);
-            dataModel.put("description_weather", description_weather);
+            dataModel.put(WeatherKeySet.IC_, id_weather);
+            dataModel.put(WeatherKeySet.ICON, icon_weather);
+            dataModel.put(WeatherKeySet.MAIN, main_weather);
+            dataModel.put(WeatherKeySet.DESCRIPTION, description_weather);
         }
            
         Object id                           = object.get("id");
@@ -118,23 +112,23 @@ public class WeatherService implements IWheaterServiceDelegate, IWheaterServiceI
         Object deg                          = wind.get("deg");      
             
             
-        dataModel.put("id", id);
-        dataModel.put("dt", dt);
-        dataModel.put("latitude", latitude);
-        dataModel.put("length", lenght);
-        dataModel.put("name", name);
-        dataModel.put("code", code);
-        dataModel.put("message", message);
-        dataModel.put("country", country);
-        dataModel.put("sunrise", sunrise);
-        dataModel.put("sunset", sunset);
-        dataModel.put("temp", temp);
-        dataModel.put("pressure", pressure);
-        dataModel.put("humidity", humidity);
-        dataModel.put("temp_max", temp_max);
-        dataModel.put("temp_min", temp_min);
-        dataModel.put("speed", speed);
-        dataModel.put("deg", deg);
+        dataModel.put(WeatherKeySet.ID, id);
+        dataModel.put(WeatherKeySet.DT, dt);
+        dataModel.put(WeatherKeySet.LATITUDE, latitude);
+        dataModel.put(WeatherKeySet.LENGTH, lenght);
+        dataModel.put(WeatherKeySet.NAME, name);
+        dataModel.put(WeatherKeySet.CODE, code);
+        dataModel.put(WeatherKeySet.MESSAGE, message);
+        dataModel.put(WeatherKeySet.COUNTRY, country);
+        dataModel.put(WeatherKeySet.SUNRISE, sunrise);
+        dataModel.put(WeatherKeySet.SUNSET, sunset);
+        dataModel.put(WeatherKeySet.TEMP, temp);
+        dataModel.put(WeatherKeySet.PRESURE, pressure);
+        dataModel.put(WeatherKeySet.HUMIDITY, humidity);
+        dataModel.put(WeatherKeySet.TEMP_MAX, temp_max);
+        dataModel.put(WeatherKeySet.TEMP_MIN, temp_min);
+        dataModel.put(WeatherKeySet.SPEED, speed);
+        dataModel.put(WeatherKeySet.DG, deg);
         
     }    
     
@@ -154,8 +148,7 @@ public class WeatherService implements IWheaterServiceDelegate, IWheaterServiceI
     }
 
     @Override
-    public HashMap<String, Object> getDataModel() {
+    public HashMap<WeatherKeySet, Object> getDataModel() {
         return dataModel;
     }
-    
 }
