@@ -36,6 +36,7 @@ public class MasterViewController implements INodeHandlerDelegate, INodeDelegate
     private IGravityServiceDelegate             gravityServiceDelegate;
     private IWheaterServiceDelegate             wheatherServiceDelegate;
     private IWheaterServiceInformationDelegate  wheatherServiceInformationDelegate;
+    
     public static MasterViewController getInstance(){
         if(masterViewController == null)
             masterViewController = new MasterViewController();
