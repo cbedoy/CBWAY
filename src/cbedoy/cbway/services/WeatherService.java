@@ -46,7 +46,7 @@ public class WeatherService implements IWheaterServiceDelegate, IWheaterServiceI
         return wheatherService;
     }
     
-    private WeatherService(){
+    public WeatherService(){
         jsonParser                  = new JSONParser();
         dataModel                   = new HashMap<WeatherKeySet, Object>();
     }

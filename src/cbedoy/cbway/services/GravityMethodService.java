@@ -21,7 +21,7 @@ public class GravityMethodService implements IGravityServiceDelegate{
         return gravityMethodService;
     }
 
-    private GravityMethodService(){
+    public GravityMethodService(){
         totalCost           = 0;
         gravityX            = 0;
         gravityY            = 0;

@@ -17,6 +17,7 @@ import cbedoy.cbway.services.BrowserService;
 import cbedoy.cbway.services.DecoratorService;
 import cbedoy.cbway.services.WeatherKeySet;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
@@ -369,7 +370,7 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
             // TODO add your handling code here:
             Double positionX = Double.parseDouble(latitude_view.getText());
             Double positionY = Double.parseDouble(lenght_view.getText());
-            BrowserService.getInstance().openWebPage(positionX, positionY, 16);
+            BrowserService.getInstance().openWebPage(positionX, positionY, 12);
         } catch (URISyntaxException | IOException ex) {
             JOptionPane.showMessageDialog(this, "Error", "Invalid url", JOptionPane.ERROR_MESSAGE);
         }
@@ -504,6 +505,8 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     public void showView() {
         setVisible(true);
     }
+
+
 
 
 }
