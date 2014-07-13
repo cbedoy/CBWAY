@@ -2,6 +2,7 @@ package cbedoy.cbway.main;
 
 import cbedoy.cbway.bussinescontrollers.MasterController;
 import cbedoy.cbway.bussinescontrollers.MasterViewController;
+import cbedoy.cbway.guice.Module;
 import cbedoy.cbway.interfaces.IGravityServiceDelegate;
 import cbedoy.cbway.interfaces.IMapDelegate;
 import cbedoy.cbway.interfaces.INodeDelegate;
@@ -19,6 +20,8 @@ import cbedoy.cbway.viewcontrollers.MainView;
 import cbedoy.cbway.viewcontrollers.SplashView;
 import cbedoy.cbway.services.GravityMethodService;
 import cbedoy.cbway.services.WeatherService;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -40,6 +43,9 @@ import java.util.logging.Logger;
 public class main {
     public static void main(String[]cbedoy){
         try {
+            
+            Injector injector = Guice.createInjector(new Module());
+            
             long time_start = System.currentTimeMillis();
             SplashView splash                                               = new SplashView();
             IViewDelegate viewDelegateSplash                                = splash;

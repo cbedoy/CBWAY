@@ -30,7 +30,7 @@ public class BrowserService {
         return browserService;
     }
     
-    private BrowserService(){
+    public BrowserService(){
         urlBuilder = new StringBuilder(url);
     } 
     
