@@ -16,6 +16,7 @@ import cbedoy.cbway.interfaces.IWheaterServiceInformationDelegate;
 import cbedoy.cbway.services.BrowserService;
 import cbedoy.cbway.services.DecoratorService;
 import cbedoy.cbway.services.WeatherKeySet;
+import com.google.inject.Injector;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.net.URISyntaxException;
@@ -505,8 +506,4 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     public void showView() {
         setVisible(true);
     }
-
-
-
-
 }

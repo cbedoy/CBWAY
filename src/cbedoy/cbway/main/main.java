@@ -62,12 +62,7 @@ public class main {
             INodeHandlerDelegate handlerDelegate                            = injector.getInstance(MasterViewController.class);
             
             representationDelegate.reloadData(null);
-            masterController.setElevation(injector.getInstance(CBElevation.class));
-            masterController.setGeocoding(injector.getInstance(CBGeocoding.class));
-            masterController.setPlaces(injector.getInstance(CBPlaces.class));
-            masterController.setRoute(injector.getInstance(CBRoute.class));
-            masterController.setStreetView(injector.getInstance(CBStreetView.class));
-            masterController.setGravityService(injector.getInstance(GravityMethodService.class));
+            masterController.setInjector(injector);
             masterController.setDataModel(dataModel);
             
             masterViewController.setMasterController(masterController);

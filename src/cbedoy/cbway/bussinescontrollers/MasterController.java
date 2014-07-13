@@ -7,6 +7,7 @@ import cbedoy.cbway.lib.CBPlaces;
 import cbedoy.cbway.lib.CBRoute;
 import cbedoy.cbway.lib.CBStreetView;
 import cbedoy.cbway.services.GravityMethodService;
+import com.google.inject.Injector;
 import java.awt.geom.Point2D;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -27,9 +28,9 @@ import java.util.List;
  */
 
 public class MasterController implements INodeDelegate{
-    
-    private static MasterController masterController;
+
     private List<Object>            dataModel;
+    private Injector                injector;
     private CBElevation             elevation;
     private CBGeocoding             geocoding;
     private CBPlaces                places;
@@ -37,60 +38,6 @@ public class MasterController implements INodeDelegate{
     private CBStreetView            streetView;
     private GravityMethodService    gravityService;
     
-    public static MasterController getInstanse(){
-        if(masterController == null)
-            masterController = new MasterController();
-        return masterController;
-    }
-
-    public CBElevation getElevation() {
-        return elevation;
-    }
-
-    public void setElevation(CBElevation elevation) {
-        this.elevation = elevation;
-    }
-
-    public CBGeocoding getGeocoding() {
-        return geocoding;
-    }
-
-    public void setGeocoding(CBGeocoding geocoding) {
-        this.geocoding = geocoding;
-    }
-
-    public CBPlaces getPlaces() {
-        return places;
-    }
-
-    public void setPlaces(CBPlaces places) {
-        this.places = places;
-    }
-
-    public CBRoute getRoute() {
-        return route;
-    }
-
-    public void setRoute(CBRoute route) {
-        this.route = route;
-    }
-
-    public CBStreetView getStreetView() {
-        return streetView;
-    }
-
-    public void setStreetView(CBStreetView streetView) {
-        this.streetView = streetView;
-    }
-
-    public GravityMethodService getGravityService() {
-        return gravityService;
-    }
-
-    public void setGravityService(GravityMethodService gravityService) {
-        this.gravityService = gravityService;
-    }
-
     @Override
     public void userSelectedCountryWithCost(String country, Double cost) {
         
@@ -113,6 +60,20 @@ public class MasterController implements INodeDelegate{
 
     public List<Object> getDataModel() {
         return dataModel;
+    }
+
+    public void setInjector(Injector injector) {
+        this.injector = injector;
+        injectInstances();
+    }
+
+    private void injectInstances() {
+        elevation       = injector.getInstance(CBElevation.class);
+        geocoding       = injector.getInstance(CBGeocoding.class);
+        places          = injector.getInstance(CBPlaces.class);
+        route           = injector.getInstance(CBRoute.class);
+        streetView      = injector.getInstance(CBStreetView.class);
+        gravityService  = injector.getInstance(GravityMethodService.class);
     }
     
     
