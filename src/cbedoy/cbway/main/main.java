@@ -47,45 +47,34 @@ public class main {
             Injector injector = Guice.createInjector(new Module());
             
             long time_start = System.currentTimeMillis();
-            SplashView splash                                               = new SplashView();
-            IViewDelegate viewDelegateSplash                                = splash;
+            IViewDelegate viewDelegateSplash                                = injector.getInstance(SplashView.class);
             viewDelegateSplash.showView();
-            WeatherService wheatherService                                  = WeatherService.getInstance();
-            IWheaterServiceDelegate wheatherServiceDelegate                 = wheatherService;
-            IWheaterServiceInformationDelegate wheatherInformationDelegate  = wheatherService;
-            
-            MainView mainView                                               = new MainView();
-            IViewDelegate viewDelegateMain                                  = mainView;
-            MasterController masterController                               = MasterController.getInstanse();
-            GravityMethodService gravityMethodService                       = GravityMethodService.getInstance();
+            MainView mainView                                               = injector.getInstance(MainView.class);
+            IViewDelegate viewDelegateMain                                  = injector.getInstance(MainView.class);
+            MasterController masterController                               = injector.getInstance(MasterController.class);
+            GravityMethodService gravityMethodService                       = injector.getInstance(GravityMethodService.class);
             List<Object> dataModel                                          = new ArrayList<Object>();
             
-            IMapDelegate    elevationDelegate                               = new CBElevation();
-            IMapDelegate    geocodingDelegate                               = new CBGeocoding();
-            IMapDelegate    placesDelegate                                  = new CBPlaces();
-            IMapDelegate    routeDelegate                                   = new CBRoute();
-            IMapDelegate    streetDelegate                                  = new CBStreetView();
-            
-            IGravityServiceDelegate serviceDelegate                         = gravityMethodService;
-            MasterViewController masterViewController                       = MasterViewController.getInstance();
-            INodeRepresentationDelegate representationDelegate              = mainView;
-            INodeDelegate nodeDelegate                                      = masterViewController;
-            INodeHandlerDelegate handlerDelegate                            = masterViewController;
+            IGravityServiceDelegate serviceDelegate                         = injector.getInstance(GravityMethodService.class);
+            MasterViewController masterViewController                       = injector.getInstance(MasterViewController.class);
+            INodeRepresentationDelegate representationDelegate              = injector.getInstance(MainView.class);
+            INodeDelegate nodeDelegate                                      = injector.getInstance(MasterViewController.class);
+            INodeHandlerDelegate handlerDelegate                            = injector.getInstance(MasterViewController.class);
             
             representationDelegate.reloadData(null);
-            masterController.setElevation(new CBElevation());
-            masterController.setGeocoding(new CBGeocoding());
-            masterController.setPlaces(new CBPlaces());
-            masterController.setRoute(new CBRoute());
-            masterController.setStreetView(new CBStreetView());
-            masterController.setGravityService(gravityMethodService);
+            masterController.setElevation(injector.getInstance(CBElevation.class));
+            masterController.setGeocoding(injector.getInstance(CBGeocoding.class));
+            masterController.setPlaces(injector.getInstance(CBPlaces.class));
+            masterController.setRoute(injector.getInstance(CBRoute.class));
+            masterController.setStreetView(injector.getInstance(CBStreetView.class));
+            masterController.setGravityService(injector.getInstance(GravityMethodService.class));
             masterController.setDataModel(dataModel);
             
             masterViewController.setMasterController(masterController);
             masterViewController.setNodeRepresentationDelegate(representationDelegate);
             masterViewController.setGravityServiceDelegate(serviceDelegate);
-            masterViewController.setWheatherServiceDelegate(wheatherServiceDelegate);
-            masterViewController.setWheatherServiceInformationDelegate(wheatherInformationDelegate);
+            masterViewController.setWheatherServiceDelegate(injector.getInstance(WeatherService.class));
+            masterViewController.setWheatherServiceInformationDelegate(injector.getInstance(WeatherService.class));
             mainView.setNodeHandlerDelegate(handlerDelegate);
             mainView.setMasterViewController(masterViewController);
             mainView.setNodeDelegate(nodeDelegate);
