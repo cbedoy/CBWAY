@@ -369,7 +369,7 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
             // TODO add your handling code here:
             Double positionX = Double.parseDouble(latitude_view.getText());
             Double positionY = Double.parseDouble(lenght_view.getText());
-            BrowserService.getInstance().openWebPage(positionX, positionY, 16);
+            BrowserService.getInstance().openWebPage(positionX, positionY, 12);
         } catch (URISyntaxException | IOException ex) {
             JOptionPane.showMessageDialog(this, "Error", "Invalid url", JOptionPane.ERROR_MESSAGE);
         }
