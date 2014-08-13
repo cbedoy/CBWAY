@@ -12,6 +12,7 @@ import cbedoy.cbway.interfaces.IWheaterServiceDelegate;
 import cbedoy.cbway.interfaces.IWheaterServiceInformationDelegate;
 import cbedoy.cbway.lib.CBElevation;
 import cbedoy.cbway.lib.CBGeocoding;
+import cbedoy.cbway.lib.CBMaps;
 import cbedoy.cbway.lib.CBPlaces;
 import cbedoy.cbway.lib.CBRoute;
 import cbedoy.cbway.lib.CBStreetView;

@@ -2,7 +2,7 @@
 package cbedoy.cbway.viewcontrollers;
 
 import cbedoy.cbway.interfaces.IViewDelegate;
-
+import java.lang.annotation.Annotation;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -82,13 +82,13 @@ public class SplashView extends javax.swing.JFrame implements Runnable, IViewDel
                 }
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SplashView.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SplashView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(SplashView.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SplashView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(SplashView.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SplashView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(SplashView.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SplashView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

@@ -2,6 +2,7 @@ package cbedoy.cbway.interfaces;
 
 import cbedoy.cbway.services.WeatherKeySet;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
