@@ -1,16 +1,13 @@
 
 package cbedoy.cbway.viewcontrollers;
 
-import cbedoy.cbway.interfaces.IViewDelegate;
-import java.lang.annotation.Annotation;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import cbedoy.cbway.interfaces.IViewRepresentationHandler;
 
 /**
  *
  * @author Carlos
  */
-public class SplashView extends javax.swing.JFrame implements Runnable, IViewDelegate{
+public class SplashView extends javax.swing.JFrame implements Runnable, IViewRepresentationHandler {
 
     Thread thread;
     public SplashView() {

@@ -1,23 +1,11 @@
 package cbedoy.cbway.guice;
 
-import cbedoy.cbway.bussinescontrollers.MasterController;
+import cbedoy.cbway.bussinescontrollers.MasterBusinessController;
 import cbedoy.cbway.bussinescontrollers.MasterViewController;
-import cbedoy.cbway.interfaces.IGravityServiceDelegate;
-import cbedoy.cbway.interfaces.IMapDelegate;
-import cbedoy.cbway.interfaces.INodeDelegate;
-import cbedoy.cbway.interfaces.INodeHandlerDelegate;
-import cbedoy.cbway.interfaces.INodeRepresentationDelegate;
-import cbedoy.cbway.interfaces.IViewDelegate;
-import cbedoy.cbway.interfaces.IWheaterServiceDelegate;
-import cbedoy.cbway.interfaces.IWheaterServiceInformationDelegate;
-import cbedoy.cbway.lib.CBElevation;
-import cbedoy.cbway.lib.CBGeocoding;
-import cbedoy.cbway.lib.CBMaps;
-import cbedoy.cbway.lib.CBPlaces;
-import cbedoy.cbway.lib.CBRoute;
-import cbedoy.cbway.lib.CBStreetView;
-import cbedoy.cbway.lib.ShowCBMaps;
-import cbedoy.cbway.lib.StaticCBMaps;
+import cbedoy.cbway.interfaces.*;
+import cbedoy.cbway.interfaces.IGravityServiceInformationHandler;
+import cbedoy.cbway.lib.*;
+import cbedoy.cbway.lib.ElevationService;
 import cbedoy.cbway.services.BrowserService;
 import cbedoy.cbway.services.DecoratorService;
 import cbedoy.cbway.services.GravityMethodService;
@@ -48,7 +36,7 @@ public class Module extends AbstractModule{
         this.bind(SplashView.class).in(Scopes.SINGLETON);
         this.bind(MainView.class).in(Scopes.SINGLETON);
         
-        this.bind(MasterController.class).in(Scopes.SINGLETON);
+        this.bind(MasterBusinessController.class).in(Scopes.SINGLETON);
         this.bind(MasterViewController.class).in(Scopes.SINGLETON);
         
         this.bind(WeatherService.class).in(Scopes.SINGLETON);
@@ -56,33 +44,33 @@ public class Module extends AbstractModule{
         this.bind(DecoratorService.class).in(Scopes.SINGLETON);
         this.bind(BrowserService.class).in(Scopes.SINGLETON);
         
-        this.bind(CBElevation.class).in(Scopes.SINGLETON);
-        this.bind(CBGeocoding.class).in(Scopes.SINGLETON);
-        this.bind(CBPlaces.class).in(Scopes.SINGLETON);
-        this.bind(CBRoute.class).in(Scopes.SINGLETON);
-        this.bind(CBStreetView.class).in(Scopes.SINGLETON);
-        this.bind(ShowCBMaps.class).in(Scopes.SINGLETON);
-        this.bind(StaticCBMaps.class).in(Scopes.SINGLETON);
+        this.bind(ElevationService.class).in(Scopes.SINGLETON);
+        this.bind(GeocodingService.class).in(Scopes.SINGLETON);
+        this.bind(PlaceService.class).in(Scopes.SINGLETON);
+        this.bind(RouteService.class).in(Scopes.SINGLETON);
+        this.bind(StreetViewService.class).in(Scopes.SINGLETON);
+        this.bind(MapURLService.class).in(Scopes.SINGLETON);
+        this.bind(StaticMapService.class).in(Scopes.SINGLETON);
         
 
         
-        this.bind(IViewDelegate.class).annotatedWith(Names.named("splash")).to(SplashView.class).in(Scopes.SINGLETON);
-        this.bind(IViewDelegate.class).annotatedWith(Names.named("main")).to(MainView.class).in(Scopes.SINGLETON);
-        this.bind(IWheaterServiceDelegate.class).to(WeatherService.class);
+        this.bind(IViewRepresentationHandler.class).annotatedWith(Names.named("splash")).to(SplashView.class).in(Scopes.SINGLETON);
+        this.bind(IViewRepresentationHandler.class).annotatedWith(Names.named("main")).to(MainView.class).in(Scopes.SINGLETON);
+        this.bind(IWheaterServiceInformationHandler.class).to(WeatherService.class);
         this.bind(IWheaterServiceInformationDelegate.class).to(WeatherService.class);
         
-        this.bind(IMapDelegate.class).annotatedWith(Names.named("elevation")).to(CBElevation.class);
-        this.bind(IMapDelegate.class).annotatedWith(Names.named("geocoding")).to(CBGeocoding.class);
-        this.bind(IMapDelegate.class).annotatedWith(Names.named("places")).to(CBPlaces.class);
-        this.bind(IMapDelegate.class).annotatedWith(Names.named("rouce")).to(CBRoute.class);
-        this.bind(IMapDelegate.class).annotatedWith(Names.named("streetview")).to(CBStreetView.class);
-        this.bind(IMapDelegate.class).annotatedWith(Names.named("showmaps")).to(ShowCBMaps.class);
-        this.bind(IMapDelegate.class).annotatedWith(Names.named("staticmaps")).to(StaticCBMaps.class);
+        this.bind(IMapInformationHandler.class).annotatedWith(Names.named("elevation")).to(ElevationService.class);
+        this.bind(IMapInformationHandler.class).annotatedWith(Names.named("geocoding")).to(GeocodingService.class);
+        this.bind(IMapInformationHandler.class).annotatedWith(Names.named("places")).to(PlaceService.class);
+        this.bind(IMapInformationHandler.class).annotatedWith(Names.named("rouce")).to(RouteService.class);
+        this.bind(IMapInformationHandler.class).annotatedWith(Names.named("streetview")).to(StreetViewService.class);
+        this.bind(IMapInformationHandler.class).annotatedWith(Names.named("showmaps")).to(MapURLService.class);
+        this.bind(IMapInformationHandler.class).annotatedWith(Names.named("staticmaps")).to(StaticMapService.class);
         
-        this.bind(IGravityServiceDelegate.class).to(GravityMethodService.class);
+        this.bind(IGravityServiceInformationHandler.class).to(GravityMethodService.class);
         this.bind(INodeRepresentationDelegate.class).to(MainView.class);
-        this.bind(INodeDelegate.class).to(MasterViewController.class);
-        this.bind(INodeHandlerDelegate.class).to(MasterViewController.class);
+        this.bind(INodeInformationDelegate.class).to(MasterViewController.class);
+        this.bind(INodeInformationHandler.class).to(MasterViewController.class);
         
         
         

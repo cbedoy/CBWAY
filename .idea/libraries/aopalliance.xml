@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="aopalliance">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/aopalliance.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/guice-3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/javax.inject.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/json-simple-1.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

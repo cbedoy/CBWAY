@@ -1,6 +1,6 @@
 package cbedoy.cbway.lib;
 
-import cbedoy.cbway.interfaces.IMapDelegate;
+import cbedoy.cbway.interfaces.IMapInformationHandler;
 import java.awt.Image;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -13,6 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -26,7 +27,7 @@ import org.w3c.dom.NodeList;
  * Facebook:    https://www.facebook.com/carlos.bedoy
  * ---------CODE && MUSIC ----------------------------------
  */
-public class CBPlaces extends CBMaps implements IMapDelegate{
+public class PlaceService extends AbstractMap implements IMapInformationHandler {
 
     private final String URLRoot="https://maps.googleapis.com/maps/api/place/search/xml";
     private final String URLDetails="https://maps.googleapis.com/maps/api/place/details/xml";
@@ -44,9 +45,9 @@ public class CBPlaces extends CBMaps implements IMapDelegate{
      * Para obtener las fotografías asociadas a las referencias, hay que llamar a la función
      * getPhoto y enviarle como parámetro la referencia.
      * @return ArrayList con las diferentes referencias de las fotografías
-     * @see CBPlaces getPlaces(double, double, int, String, String, maps.java.CBPlaces.Rankby, java.util.ArrayList)
-     * @see CBPlaces getPlaceReview(String)
-     * @see CBPlaces getPhoto(String, int)
+     * @see PlaceService getPlaces(double, double, int, String, String, maps.java.CBPlaces.Rankby, java.util.ArrayList)
+     * @see PlaceService getPlaceReview(String)
+     * @see PlaceService getPhoto(String, int)
      * 
      */
     public ArrayList<String> getPhotosReference() {
@@ -121,7 +122,7 @@ public class CBPlaces extends CBMaps implements IMapDelegate{
             }
         }
         URL urlReturn=new URL(_location + _radius + _keyword + _namePlace + _rankby +
-                _types + super.getSelectPropertiesRequest() + "&key=" + CBMaps.getKey());
+                _types + super.getSelectPropertiesRequest() + "&key=" + AbstractMap.getKey());
         return urlReturn;
     }
     
@@ -150,10 +151,10 @@ public class CBPlaces extends CBMaps implements IMapDelegate{
      * https://developers.google.com/places/documentation/supported_types?hl=es
      * @return devuelve string bidimensional con información sobre places. <br/>
      * En caso de error retorna null.
-     * @see CBPlaces.Rankby
-     * @see CBPlaces#getPhotosReference()
-     * @see CBPlaces#getPlacesDetails(String)
-     * @see CBPlaces#getPlaceReview
+     * @see PlaceService.Rankby
+     * @see PlaceService#getPhotosReference()
+     * @see PlaceService#getPlacesDetails(String)
+     * @see PlaceService#getPlaceReview
      */
     public String[][] getPlaces(double latitude, double longitude,int radius,String keyword,String namePlace,
             Rankby rankby,ArrayList<String> types) throws UnsupportedEncodingException, MalformedURLException{
@@ -218,7 +219,7 @@ public class CBPlaces extends CBMaps implements IMapDelegate{
     
     private URL createURL(String reference) throws UnsupportedEncodingException, MalformedURLException{
         URL urlReturn=new URL(URLDetails + "?reference=" + URLEncoder.encode(reference, "utf-8") + 
-                super.getSelectPropertiesRequest() + "&key=" + CBMaps.getKey());
+                super.getSelectPropertiesRequest() + "&key=" + AbstractMap.getKey());
         return urlReturn;
     }
     
@@ -237,7 +238,7 @@ public class CBPlaces extends CBMaps implements IMapDelegate{
      * @param referencePlace referencia del place (se obtiene a través de la función getPlace)
      * @return devuelve String[8] con la información del local.<br/>
      * En caso de error devuelve null
-     * @see CBPlaces getPlaces(double, double, int, String, String, maps.java.CBPlaces.Rankby, java.util.ArrayList)
+     * @see PlaceService getPlaces(double, double, int, String, String, maps.java.CBPlaces.Rankby, java.util.ArrayList)
      */
     public String[] getPlacesDetails(String referencePlace) throws UnsupportedEncodingException, MalformedURLException{
         URL url=createURL(referencePlace);
@@ -323,9 +324,9 @@ public class CBPlaces extends CBMaps implements IMapDelegate{
      * @param referencePlace referencia del place (se obtiene a través de la función getPlace)
      * @return devuelve un array bidimensional [i][4] con la información de las reviews.<br/>
      * En caso de error devuelve null
-     * @see CBPlaces getPlaces(double, double, int, String, String, maps.java.CBPlaces.Rankby, java.util.ArrayList)
-     * @see CBPlaces getPhotosReference()
-     * @see CBPlaces getPhoto(String, int)
+     * @see PlaceService getPlaces(double, double, int, String, String, maps.java.CBPlaces.Rankby, java.util.ArrayList)
+     * @see PlaceService getPhotosReference()
+     * @see PlaceService getPhoto(String, int)
      */
     public String[][] getPlaceReview(String referencePlace) throws UnsupportedEncodingException, MalformedURLException{
         URL url=createURL(referencePlace);
@@ -368,7 +369,7 @@ public class CBPlaces extends CBMaps implements IMapDelegate{
     
     private URL createURL(String photoreference,int maxWidth) throws MalformedURLException{
         URL urlReturn=new URL(URLPhoto + "?maxwidth=" + maxWidth + "&photoreference=" + 
-                photoreference + super.getSelectPropertiesRequest() + "&key=" + CBMaps.getKey());
+                photoreference + super.getSelectPropertiesRequest() + "&key=" + AbstractMap.getKey());
         return urlReturn;
     }
     

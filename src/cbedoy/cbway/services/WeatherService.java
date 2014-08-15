@@ -1,6 +1,6 @@
 package cbedoy.cbway.services;
 
-import cbedoy.cbway.interfaces.IWheaterServiceDelegate;
+import cbedoy.cbway.interfaces.IWheaterServiceInformationHandler;
 import cbedoy.cbway.interfaces.IWheaterServiceInformationDelegate;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
-import org.json.simple.JSONArray;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -27,7 +27,7 @@ import org.json.simple.parser.ParseException;
  * 28/05/2014 - 05:23:40 PM
  */
 
-public class WeatherService implements IWheaterServiceDelegate, IWheaterServiceInformationDelegate{
+public class WeatherService implements IWheaterServiceInformationHandler, IWheaterServiceInformationDelegate{
 
     private final String                    rootURL = "http://api.openweathermap.org/data/2.5/weather?";
     private URLConnection                   urlConnection;

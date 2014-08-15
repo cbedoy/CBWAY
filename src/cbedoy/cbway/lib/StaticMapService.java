@@ -20,17 +20,10 @@ import org.w3c.dom.Document;
  * Facebook:    https://www.facebook.com/carlos.bedoy
  * ---------CODE && MUSIC ----------------------------------
  */
-public class StaticCBMaps extends CBMaps {
+public class StaticMapService extends AbstractMap
+{
     private final String URLRoot="http://maps.googleapis.com/maps/api/staticmap";
-    
-    /**
-     * Establece el tipo de formato del mapa estático. Sus posisbles valores son:<br/>
-     * <b>png:</b> especifica el formato PNG de 8 bits.<br/>
-     * <b>png32:</b> especifica el formato PNG de 32 bits.<br/>
-     * <b>gif:</b> especifica el formato GIF.<br/>
-     * <b>jpg:</b> especifica el formato de compresión JPEG.<br/>
-     * <b>jpg_baseline:</b> especifica un formato de compresión JPEG no progresivo.
-     */
+
     public enum Format{
         png,
         png32,
@@ -38,15 +31,7 @@ public class StaticCBMaps extends CBMaps {
         jpg,
         jpg_baseline
     }
-    
-    /**
-     * Define el tipo de mapa que se va a generar. Sus posibles valores son:<br/>
-     * <b>roadmap:</b> especifica una imagen de mapa de carreteras estándar, como se muestra habitualmente en la página de Google Maps.<br/>
-     * <b>satellite:</b> especifica una imagen obtenida por satélite.<br/>
-     * <b>hybrid:</b> especifica una imagen de mapa de relieve físico, en la que aparece relieve y vegetación.<br/>
-     * <b>terrain:</b> especifica un híbrido de imagen obtenida por satélite e imagen de mapa de carreteras, en la que aparece una capa 
-     * transparente de calles principales y nombres de lugares en la imagen obtenida por satélite.
-     */
+
     public enum Maptype{roadmap, satellite, hybrid,terrain}
     
     @Override
@@ -75,8 +60,8 @@ public class StaticCBMaps extends CBMaps {
      * @param maptype define el tipo de mapa que se va a generar
      * @return devuelve una Image con el mapa estático asociado.<br/>
      * En caso de error devuelve null
-     * @see StaticCBMaps.Format
-     * @see StaticCBMaps.Maptype
+     * @see StaticMapService.Format
+     * @see StaticMapService.Maptype
      */
     public Image getStaticMap(String centerAddress,int zoom,Dimension size,int scale,Format format, Maptype maptype) throws MalformedURLException, UnsupportedEncodingException{
         URL url=new URL(URLRoot + "?center=" + URLEncoder.encode(centerAddress, "utf-8") + "&zoom=" + zoom +

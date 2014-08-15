@@ -1,21 +1,12 @@
 package cbedoy.cbway.main;
 
-import cbedoy.cbway.bussinescontrollers.MasterController;
+import cbedoy.cbway.bussinescontrollers.MasterBusinessController;
 import cbedoy.cbway.bussinescontrollers.MasterViewController;
 import cbedoy.cbway.guice.Module;
-import cbedoy.cbway.interfaces.IGravityServiceDelegate;
-import cbedoy.cbway.interfaces.IMapDelegate;
-import cbedoy.cbway.interfaces.INodeDelegate;
-import cbedoy.cbway.interfaces.INodeHandlerDelegate;
-import cbedoy.cbway.interfaces.INodeRepresentationDelegate;
-import cbedoy.cbway.interfaces.IViewDelegate;
-import cbedoy.cbway.interfaces.IWheaterServiceDelegate;
-import cbedoy.cbway.interfaces.IWheaterServiceInformationDelegate;
-import cbedoy.cbway.lib.CBElevation;
-import cbedoy.cbway.lib.CBGeocoding;
-import cbedoy.cbway.lib.CBPlaces;
-import cbedoy.cbway.lib.CBRoute;
-import cbedoy.cbway.lib.CBStreetView;
+import cbedoy.cbway.interfaces.*;
+import cbedoy.cbway.interfaces.IGravityServiceInformationHandler;
+import cbedoy.cbway.lib.*;
+import cbedoy.cbway.lib.ElevationService;
 import cbedoy.cbway.viewcontrollers.MainView;
 import cbedoy.cbway.viewcontrollers.SplashView;
 import cbedoy.cbway.services.GravityMethodService;
@@ -24,8 +15,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -47,30 +36,30 @@ public class main {
             Injector injector = Guice.createInjector(new Module());
             
             long time_start = System.currentTimeMillis();
-            IViewDelegate viewDelegateSplash                                = injector.getInstance(SplashView.class);
+            IViewRepresentationHandler viewDelegateSplash                                = injector.getInstance(SplashView.class);
             viewDelegateSplash.showView();
             MainView mainView                                               = injector.getInstance(MainView.class);
-            IViewDelegate viewDelegateMain                                  = injector.getInstance(MainView.class);
-            MasterController masterController                               = injector.getInstance(MasterController.class);
+            IViewRepresentationHandler viewDelegateMain                                  = injector.getInstance(MainView.class);
+            MasterBusinessController masterBusinessController = injector.getInstance(MasterBusinessController.class);
             GravityMethodService gravityMethodService                       = injector.getInstance(GravityMethodService.class);
             List<Object> dataModel                                          = new ArrayList<Object>();
             
-            IGravityServiceDelegate serviceDelegate                         = injector.getInstance(GravityMethodService.class);
+            IGravityServiceInformationHandler serviceDelegate                         = injector.getInstance(GravityMethodService.class);
             MasterViewController masterViewController                       = injector.getInstance(MasterViewController.class);
             INodeRepresentationDelegate representationDelegate              = injector.getInstance(MainView.class);
-            INodeDelegate nodeDelegate                                      = injector.getInstance(MasterViewController.class);
-            INodeHandlerDelegate handlerDelegate                            = injector.getInstance(MasterViewController.class);
+            INodeInformationDelegate nodeDelegate                                      = injector.getInstance(MasterViewController.class);
+            INodeInformationHandler handlerDelegate                            = injector.getInstance(MasterViewController.class);
             
             representationDelegate.reloadData(null);
-            masterController.setElevation(injector.getInstance(CBElevation.class));
-            masterController.setGeocoding(injector.getInstance(CBGeocoding.class));
-            masterController.setPlaces(injector.getInstance(CBPlaces.class));
-            masterController.setRoute(injector.getInstance(CBRoute.class));
-            masterController.setStreetView(injector.getInstance(CBStreetView.class));
-            masterController.setGravityService(injector.getInstance(GravityMethodService.class));
-            masterController.setDataModel(dataModel);
+            masterBusinessController.setElevation(injector.getInstance(ElevationService.class));
+            masterBusinessController.setGeocoding(injector.getInstance(GeocodingService.class));
+            masterBusinessController.setPlaces(injector.getInstance(PlaceService.class));
+            masterBusinessController.setRoute(injector.getInstance(RouteService.class));
+            masterBusinessController.setStreetView(injector.getInstance(StreetViewService.class));
+            masterBusinessController.setGravityService(injector.getInstance(GravityMethodService.class));
+            masterBusinessController.setDataModel(dataModel);
             
-            masterViewController.setMasterController(masterController);
+            masterViewController.setMasterBusinessController(masterBusinessController);
             masterViewController.setNodeRepresentationDelegate(representationDelegate);
             masterViewController.setGravityServiceDelegate(serviceDelegate);
             masterViewController.setWheatherServiceDelegate(injector.getInstance(WeatherService.class));

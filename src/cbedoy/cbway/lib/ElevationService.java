@@ -1,7 +1,7 @@
 package cbedoy.cbway.lib;
 
 
-import cbedoy.cbway.interfaces.IMapDelegate;
+import cbedoy.cbway.interfaces.IMapInformationHandler;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -24,7 +25,7 @@ import org.w3c.dom.NodeList;
  * Facebook:    https://www.facebook.com/carlos.bedoy
  * ---------CODE && MUSIC ----------------------------------
  */
-public class CBElevation extends CBMaps implements IMapDelegate {
+public class ElevationService extends AbstractMap implements IMapInformationHandler {
 
     private final String URLRoot        = "http://maps.googleapis.com/maps/api/elevation/xml";
     private final String pathStatus     = "ElevationResponse/status";
@@ -37,7 +38,7 @@ public class CBElevation extends CBMaps implements IMapDelegate {
      * <b>REQUIERE PRIMERAMENTE HACER PETICIÓN DE ELEVACIÓN.</b>
      * @return devuelve la/s resolucion/es en metros de la última petición de elevación.
      * En caso de error, devuelve un ArrayList vacío.
-     * @see CBElevation elevation(java.util.ArrayList)
+     * @see ElevationService elevation(java.util.ArrayList)
      */
     public ArrayList<Double> getResolutionList() {
         return resolutionList;
@@ -48,7 +49,7 @@ public class CBElevation extends CBMaps implements IMapDelegate {
      * <b>REQUIERE PRIMERAMENTE HACER PETICIÓN DE ELEVACIÓN.</b>
      * @return devuelve la resolución en metros de la última petición de elevación.
      * En caso de error devuelve 0.0
-     * @see CBElevation elevation(double, double)
+     * @see ElevationService elevation(double, double)
      */
     public double getResolution() {
         return resolution;
@@ -58,6 +59,7 @@ public class CBElevation extends CBMaps implements IMapDelegate {
         URL urlReturn=new URL(URLRoot + "?locations=" + latitude + "," + longitude + super.getSelectPropertiesRequest());
         return urlReturn;
     }
+
     private URL createURL(ArrayList<Double> LatiLong) throws MalformedURLException{
         String locations            = "";
         for (int i = 0; i < LatiLong.size(); i+=2) {
@@ -96,7 +98,7 @@ public class CBElevation extends CBMaps implements IMapDelegate {
      * @param longitude longitud del punto a obtener elevación
      * @return devuelve la elevación en metros del lugar especificado.
      * Devuelve 0.0 en caso de error.
-     * @see CBElevation#getResolution()
+     * @see ElevationService#getResolution()
      */
     public double getElevation(double latitude, double longitude) throws MalformedURLException{
         URL url=createURL(latitude,longitude);
@@ -107,12 +109,10 @@ public class CBElevation extends CBMaps implements IMapDelegate {
                 Document document               = builder.parse(url.openStream()); 
 
                 XPathFactory xpathFactory       = XPathFactory.newInstance(); 
-                XPath xpath = xpathFactory.newXPath(); 
+                XPath xpath                     = xpathFactory.newXPath();
 
-                NodeList nodeElevation          = (NodeList) xpath.evaluate("ElevationResponse/result/elevation", 
-                         document, XPathConstants.NODESET);
-                NodeList nodeResolution         = (NodeList) xpath.evaluate("ElevationResponse/result/resolution", 
-                         document, XPathConstants.NODESET);
+                NodeList nodeElevation          = (NodeList) xpath.evaluate("ElevationResponse/result/elevation",   document, XPathConstants.NODESET);
+                NodeList nodeResolution         = (NodeList) xpath.evaluate("ElevationResponse/result/resolution",  document, XPathConstants.NODESET);
                 
                double elevationResult   = 0.0;
                
@@ -138,7 +138,7 @@ public class CBElevation extends CBMaps implements IMapDelegate {
      * El orden debe de ser latitud1/longitud1/latitud2/longitud2, etc.
      * @return devuelve un ArrayList<Double> con las elevaciones correspondientes a cada par de coordenadas.
      * Devuelve null en caso de error.
-     * @see CBElevation#getResolutionList()
+     * @see ElevationService#getResolutionList()
      */
     public ArrayList<Double> getElevation(ArrayList<Double> LatiLong) throws MalformedURLException{
         URL url=createURL(LatiLong);

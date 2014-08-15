@@ -7,17 +7,12 @@
 package cbedoy.cbway.viewcontrollers;
 
 import cbedoy.cbway.bussinescontrollers.MasterViewController;
-import cbedoy.cbway.interfaces.IGravityServiceDelegate;
-import cbedoy.cbway.interfaces.INodeDelegate;
-import cbedoy.cbway.interfaces.INodeHandlerDelegate;
-import cbedoy.cbway.interfaces.INodeRepresentationDelegate;
-import cbedoy.cbway.interfaces.IViewDelegate;
-import cbedoy.cbway.interfaces.IWheaterServiceInformationDelegate;
+import cbedoy.cbway.interfaces.*;
+import cbedoy.cbway.interfaces.IGravityServiceInformationHandler;
 import cbedoy.cbway.services.BrowserService;
 import cbedoy.cbway.services.DecoratorService;
 import cbedoy.cbway.services.WeatherKeySet;
 import java.io.IOException;
-import java.lang.annotation.Annotation;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
@@ -30,11 +25,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Carlos
  */
-public class MainView extends javax.swing.JFrame implements INodeRepresentationDelegate, IViewDelegate{
+public class MainView extends javax.swing.JFrame implements INodeRepresentationDelegate, IViewRepresentationHandler {
     private final DefaultTableModel             defaultTableModel;
     private MasterViewController                masterViewController;
-    private INodeHandlerDelegate                nodeHandlerDelegate;
-    private INodeDelegate                       nodeDelegate;
+    private INodeInformationHandler nodeHandlerDelegate;
+    private INodeInformationDelegate nodeDelegate;
     
     public MainView() {
         initComponents();
@@ -268,7 +263,7 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        dataCenter.setModel(new javax.swing.table.DefaultTableModel(
+        dataCenter.setModel(new DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -355,8 +350,8 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void actionSolveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actionSolveActionPerformed
-        IGravityServiceDelegate gravityServiceDelegate  = masterViewController.getGravityServiceDelegate();
-        List<Object> dataModel                          = masterViewController.getMasterController().getDataModel();
+        IGravityServiceInformationHandler gravityServiceDelegate  = masterViewController.getGravityServiceDelegate();
+        List<Object> dataModel                          = masterViewController.getMasterBusinessController().getDataModel();
         gravityServiceDelegate.solveNodes(dataModel);
         nodeHandlerDelegate.userRequestSolution();
     }//GEN-LAST:event_actionSolveActionPerformed
@@ -393,13 +388,13 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -483,11 +478,11 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
         defaultTableModel.addRow(row);
     }
     
-    public void setNodeHandlerDelegate(INodeHandlerDelegate nodeHandlerDelegate) {
+    public void setNodeHandlerDelegate(INodeInformationHandler nodeHandlerDelegate) {
         this.nodeHandlerDelegate = nodeHandlerDelegate;
     }
 
-    public void setNodeDelegate(INodeDelegate nodeDelegate) {
+    public void setNodeDelegate(INodeInformationDelegate nodeDelegate) {
         this.nodeDelegate = nodeDelegate;
     }
 

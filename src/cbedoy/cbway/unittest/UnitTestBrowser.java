@@ -18,8 +18,10 @@ import java.net.URISyntaxException;
  * 2/06/2014 - 01:20:44 AM
  */
 
-public class UnitTestBrowser {
-    public static void main(String[]cbedoy) throws URISyntaxException, IOException{
+public class UnitTestBrowser
+{
+    public static void main(String[]cbedoy) throws URISyntaxException, IOException
+    {
         URI uri = new URI("www.facebook.com");
         BrowserService.getInstance().openWebPage(30L,30L,22);
     }

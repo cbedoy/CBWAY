@@ -17,7 +17,7 @@ import org.w3c.dom.Document;
  * Facebook:    https://www.facebook.com/carlos.bedoy
  * ---------CODE && MUSIC ----------------------------------
  */
-public class ShowCBMaps extends CBMaps {
+public class MapURLService extends AbstractMap {
     private String URLRoot="http://maps.google.es/maps?q=";
 
     @Override
@@ -34,24 +34,13 @@ public class ShowCBMaps extends CBMaps {
     protected void storeInfoRequest(URL urlRequest, String info, String status, Exception exception) {
                 super.storageRequest(urlRequest.toString(), "Map request", "OK", null);
     }
-    
-    /**
-     * Crea la URL con la dirección del mapa web asociado a dicha dirección
-     * @param address dirección postal del mapa a mostrar
-     * @return devuelve un string con la URL asociada al mapa web
-     */
+
     public String getURLMap(String address) throws MalformedURLException, UnsupportedEncodingException{
          URL urlReturn=new URL(URLRoot + URLEncoder.encode(address, "utf-8") + "&output=embed");
          this.storeInfoRequest(urlReturn,null,null,null);
          return urlReturn.toString();
     }
-    
-    /**
-     * Crea la URL con la coordenada geográfica del mapa web asociado 
-     * @param latitude latitud del punto a mostrar
-     * @param longitude longitud del punto a mostrar
-     * @return devuelve un string con la URL asociada al mapa web
-     */
+
     public String getURLMap(Double latitude, Double longitude) throws MalformedURLException{
         URL urlReturn=new URL(URLRoot + String.valueOf(latitude)+ "%2C" + String.valueOf(longitude) + "&output=embed");
          this.storeInfoRequest(urlReturn,null,null,null);

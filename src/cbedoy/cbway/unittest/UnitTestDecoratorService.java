@@ -16,7 +16,8 @@ import cbedoy.cbway.services.DecoratorService;
  */
 
 public class UnitTestDecoratorService {
-    public static void main(String[]cbedoy){
+    public static void main(String[]cbedoy)
+    {
         DecoratorService decorator = DecoratorService.getInstance();
         String dateFormated = decorator.getDateFormated(123456789);
         System.out.println(dateFormated);

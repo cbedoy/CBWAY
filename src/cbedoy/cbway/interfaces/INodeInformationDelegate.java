@@ -13,7 +13,7 @@ package cbedoy.cbway.interfaces;
  * 25-may-2014 - 0:09:09
  */
 
-public interface INodeDelegate {
+public interface INodeInformationDelegate {
     
     public void userSelectedCountryWithCost(String country, Double cost);
     
