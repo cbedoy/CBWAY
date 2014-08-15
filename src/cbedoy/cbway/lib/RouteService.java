@@ -1,6 +1,6 @@
 package cbedoy.cbway.lib;
 
-import cbedoy.cbway.interfaces.IMapDelegate;
+import cbedoy.cbway.interfaces.IMapInformationHandler;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -11,6 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -24,7 +25,7 @@ import org.w3c.dom.NodeList;
  * Facebook:    https://www.facebook.com/carlos.bedoy
  * ---------CODE && MUSIC ----------------------------------
  */
-public class CBRoute extends CBMaps implements IMapDelegate{
+public class RouteService extends AbstractMap implements IMapInformationHandler {
 
     private final String        URLRoot="http://maps.googleapis.com/maps/api/directions/xml";
     private final String        pathStatus="DirectionsResponse/status";
@@ -57,7 +58,7 @@ public class CBRoute extends CBMaps implements IMapDelegate{
      * Indica el resumen de la ruta calculada.<br/>
      * <b>REQUIERE CALCULAR PRIMERAMENTE LA RUTA (con getRoute).</b>
      * @return devuelve resumen de la ruta
-     * @see cbedoy.cbway.lib.CBRoute getRoute(String, String, java.util.ArrayList, Boolean, maps.java.CBRoute.mode, maps.java.CBRoute.avoids)
+     * @see RouteService getRoute(String, String, java.util.ArrayList, Boolean, maps.java.CBRoute.mode, maps.java.CBRoute.avoids)
      */
     public String getSummary() {
         return summary;
@@ -67,7 +68,7 @@ public class CBRoute extends CBMaps implements IMapDelegate{
      * Indica el copyright de la ruta calculada.<br/>
      * <b>REQUIERE CALCULAR PRIMERAMENTE LA RUTA (con getRoute).</b>
      * @return devuelve copyright de la ruta
-     * @see cbedoy.cbway.lib.CBRoute getRoute(String, String, java.util.ArrayList, Boolean, maps.java.CBRoute.mode, maps.java.CBRoute.avoids)
+     * @see RouteService getRoute(String, String, java.util.ArrayList, Boolean, maps.java.CBRoute.mode, maps.java.CBRoute.avoids)
      */
     public String getCopyright() {
         return copyright;
@@ -77,7 +78,7 @@ public class CBRoute extends CBMaps implements IMapDelegate{
      * Indica el orden de los hitos incluidos en la ruta.<br/>
      * <b>REQUIERE CALCULAR PRIMERAMENTE LA RUTA (con getRoute).</b>
      * @return devuelve el orden de la ruta
-     * @see cbedoy.cbway.lib.CBRoute getRoute(String, String, java.util.ArrayList, Boolean, maps.java.CBRoute.mode, maps.java.CBRoute.avoids)
+     * @see RouteService getRoute(String, String, java.util.ArrayList, Boolean, maps.java.CBRoute.mode, maps.java.CBRoute.avoids)
      */
     public ArrayList<Integer> getWaypointIndex() {
         return waypointIndex;
@@ -87,7 +88,7 @@ public class CBRoute extends CBMaps implements IMapDelegate{
      * Indica el tiempo total (en segundos) de la ruta calculada (por tramos).<br/>
      * <b>REQUIERE CALCULAR PRIMERAMENTE LA RUTA (con getRoute).</b>
      * @return devuelve el tiempo total de la ruta (en segundos)
-     * @see cbedoy.cbway.lib.CBRoute getRoute(String, String, java.util.ArrayList, Boolean, maps.java.CBRoute.mode, maps.java.CBRoute.avoids)
+     * @see RouteService getRoute(String, String, java.util.ArrayList, Boolean, maps.java.CBRoute.mode, maps.java.CBRoute.avoids)
      */
     public ArrayList<Integer> getTotalTime() {
         return totalTime;
@@ -97,7 +98,7 @@ public class CBRoute extends CBMaps implements IMapDelegate{
      * Indica las distancia total (en metros) de la ruta calculada (por tramos).<br/>
      * <b>REQUIERE CALCULAR PRIMERAMENTE LA RUTA (con getRoute).</b>
      * @return devuelve la distancia total de la ruta (en metros)
-     * @see cbedoy.cbway.lib.CBRoute getRoute(String, String, java.util.ArrayList, Boolean, maps.java.CBRoute.mode, maps.java.CBRoute.avoids)
+     * @see RouteService getRoute(String, String, java.util.ArrayList, Boolean, maps.java.CBRoute.mode, maps.java.CBRoute.avoids)
      */
     public ArrayList<Integer> getTotalDistance() {
         return totalDistance;
@@ -107,7 +108,7 @@ public class CBRoute extends CBMaps implements IMapDelegate{
      * Indica la referencia de las polilíneas asociadas a cada tramo.<br/>
      * <b>REQUIERE CALCULAR PRIMERAMENTE LA RUTA (con getRoute).</b>
      * @return devuelve referencia de las polilíneas asociadas a cada tramo
-     * @see cbedoy.cbway.lib.CBRoute getRoute(String, String, java.util.ArrayList, Boolean, maps.java.CBRoute.mode, maps.java.CBRoute.avoids)
+     * @see RouteService getRoute(String, String, java.util.ArrayList, Boolean, maps.java.CBRoute.mode, maps.java.CBRoute.avoids)
      */
     public ArrayList<String> getPolilines() {
         return polilines;
@@ -215,13 +216,13 @@ public class CBRoute extends CBMaps implements IMapDelegate{
      * @param avoidsRoad indica restricción de vías
      * @return devuelve un string bidimensional con la información de la .<br/>
      * En caso de error devuelve null
-     * @see cbedoy.cbway.lib.CBRoute#getCopyright()
-     * @see cbedoy.cbway.lib.CBRoute#getSummary()
-     * @see cbedoy.cbway.lib.CBRoute#getTotalDistance()
-     * @see cbedoy.cbway.lib.CBRoute#getTotalTime()
-     * @see cbedoy.cbway.lib.CBRoute#getWaypointIndex()
-     * @see cbedoy.cbway.lib.CBRoute.mode
-     * @see cbedoy.cbway.lib.CBRoute.avoids
+     * @see RouteService#getCopyright()
+     * @see RouteService#getSummary()
+     * @see RouteService#getTotalDistance()
+     * @see RouteService#getTotalTime()
+     * @see RouteService#getWaypointIndex()
+     * @see RouteService.mode
+     * @see RouteService.avoids
      */
     public String[][] getRoute(String originAddress, String destinationAddress, ArrayList<String> waypoints,
             Boolean optimize, mode travelMode,avoids avoidsRoad) throws MalformedURLException, UnsupportedEncodingException{

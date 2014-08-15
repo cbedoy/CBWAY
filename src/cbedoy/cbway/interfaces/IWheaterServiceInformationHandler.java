@@ -10,11 +10,15 @@ package cbedoy.cbway.interfaces;
  * Github:          https://github.com/cbedoy
  * WebSite:         http://cbedoy.github.io/
  *
- * 27/05/2014 - 05:54:14 PM
+ * 28/05/2014 - 05:23:53 PM
  */
 
-public interface IViewDelegate {
-    public void hideView();
-    public void reloadView();
-    public void showView();
+public interface IWheaterServiceInformationHandler {
+    
+    public void requestWithCity(String city);
+    
+    public void requestWithCordinates(double latitude, double length);
+    
+    public void requestWithCountryCity(String country, String city);
+        
 }

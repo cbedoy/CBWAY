@@ -1,15 +1,10 @@
 package cbedoy.cbway.bussinescontrollers;
 
-import cbedoy.cbway.interfaces.INodeDelegate;
-import cbedoy.cbway.lib.CBElevation;
-import cbedoy.cbway.lib.CBGeocoding;
-import cbedoy.cbway.lib.CBPlaces;
-import cbedoy.cbway.lib.CBRoute;
-import cbedoy.cbway.lib.CBStreetView;
+import cbedoy.cbway.interfaces.INodeInformationDelegate;
+import cbedoy.cbway.lib.*;
+import cbedoy.cbway.lib.ElevationService;
 import cbedoy.cbway.services.GravityMethodService;
 import java.awt.geom.Point2D;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,60 +21,60 @@ import java.util.List;
  * 25-may-2014 - 0:11:41
  */
 
-public class MasterController implements INodeDelegate{
+public class MasterBusinessController implements INodeInformationDelegate {
     
-    private static MasterController masterController;
+    private static MasterBusinessController masterBusinessController;
     private List<Object>            dataModel;
-    private CBElevation             elevation;
-    private CBGeocoding             geocoding;
-    private CBPlaces                places;
-    private CBRoute                 route;
-    private CBStreetView            streetView;
+    private ElevationService elevation;
+    private GeocodingService geocoding;
+    private PlaceService places;
+    private RouteService route;
+    private StreetViewService streetView;
     private GravityMethodService    gravityService;
     
-    public static MasterController getInstanse(){
-        if(masterController == null)
-            masterController = new MasterController();
-        return masterController;
+    public static MasterBusinessController getInstanse(){
+        if(masterBusinessController == null)
+            masterBusinessController = new MasterBusinessController();
+        return masterBusinessController;
     }
 
-    public CBElevation getElevation() {
+    public ElevationService getElevation() {
         return elevation;
     }
 
-    public void setElevation(CBElevation elevation) {
+    public void setElevation(ElevationService elevation) {
         this.elevation = elevation;
     }
 
-    public CBGeocoding getGeocoding() {
+    public GeocodingService getGeocoding() {
         return geocoding;
     }
 
-    public void setGeocoding(CBGeocoding geocoding) {
+    public void setGeocoding(GeocodingService geocoding) {
         this.geocoding = geocoding;
     }
 
-    public CBPlaces getPlaces() {
+    public PlaceService getPlaces() {
         return places;
     }
 
-    public void setPlaces(CBPlaces places) {
+    public void setPlaces(PlaceService places) {
         this.places = places;
     }
 
-    public CBRoute getRoute() {
+    public RouteService getRoute() {
         return route;
     }
 
-    public void setRoute(CBRoute route) {
+    public void setRoute(RouteService route) {
         this.route = route;
     }
 
-    public CBStreetView getStreetView() {
+    public StreetViewService getStreetView() {
         return streetView;
     }
 
-    public void setStreetView(CBStreetView streetView) {
+    public void setStreetView(StreetViewService streetView) {
         this.streetView = streetView;
     }
 

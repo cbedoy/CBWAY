@@ -1,6 +1,6 @@
 package cbedoy.cbway.lib;
 
-import cbedoy.cbway.interfaces.IMapDelegate;
+import cbedoy.cbway.interfaces.IMapInformationHandler;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.io.UnsupportedEncodingException;
@@ -9,6 +9,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import javax.imageio.ImageIO;
 import javax.xml.xpath.XPath;
+
 import org.w3c.dom.Document;
 
 /**
@@ -21,7 +22,8 @@ import org.w3c.dom.Document;
  * Facebook:    https://www.facebook.com/carlos.bedoy
  * ---------CODE && MUSIC ----------------------------------
  */
-public class CBStreetView extends CBMaps implements IMapDelegate{
+public class StreetViewService extends AbstractMap implements IMapInformationHandler {
+
     private final String URLRoot="http://maps.googleapis.com/maps/api/streetview";
     
     @Override
@@ -31,7 +33,7 @@ public class CBStreetView extends CBMaps implements IMapDelegate{
 
     @Override
     protected String getStatus(XPath xpath, Document document) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override

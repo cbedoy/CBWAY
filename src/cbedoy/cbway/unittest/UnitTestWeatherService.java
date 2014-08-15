@@ -1,6 +1,10 @@
 package cbedoy.cbway.unittest;
 
-import cbedoy.cbway.lib.CBGeocoding;
+import cbedoy.cbway.guice.Module;
+import cbedoy.cbway.interfaces.IGravityServiceInformationHandler;
+import cbedoy.cbway.interfaces.IWheaterServiceInformationDelegate;
+import cbedoy.cbway.interfaces.IWheaterServiceInformationHandler;
+import cbedoy.cbway.lib.GeocodingService;
 import cbedoy.cbway.services.GravityMethodService;
 import cbedoy.cbway.services.WeatherKeySet;
 import cbedoy.cbway.services.WeatherService;
@@ -9,6 +13,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.json.simple.parser.ParseException;
 /**
  *
@@ -25,10 +31,12 @@ import org.json.simple.parser.ParseException;
 
 public class UnitTestWeatherService{
     public static void main(String[]cbedoy) throws ParseException{
-       long time_start = System.currentTimeMillis(); 
-       WeatherService service               = WeatherService.getInstance();
-       GravityMethodService gravity         = GravityMethodService.getInstance();
-       CBGeocoding geocoding                = new CBGeocoding();
+       long time_start = System.currentTimeMillis();
+        Injector injector = Guice.createInjector(new Module());
+
+        IGravityServiceInformationHandler method = injector.getInstance(GravityMethodService.class);
+        WeatherService service = injector.getInstance(WeatherService.class);
+       GeocodingService geocoding                = new GeocodingService();
        String[] countries                   = new String[]{"mexico", "brazil", "argentina", "españa"};
        HashMap<Object, Object> wheatherData = new HashMap<Object, Object>();
         try {

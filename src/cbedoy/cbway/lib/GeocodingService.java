@@ -1,6 +1,6 @@
 package cbedoy.cbway.lib;
 
-import cbedoy.cbway.interfaces.IMapDelegate;
+import cbedoy.cbway.interfaces.IMapInformationHandler;
 import java.awt.geom.Point2D;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -13,6 +13,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -26,7 +27,7 @@ import org.w3c.dom.NodeList;
  * Facebook:    https://www.facebook.com/carlos.bedoy
  * ---------CODE && MUSIC ----------------------------------
  */
-public class CBGeocoding extends CBMaps implements IMapDelegate{
+public class GeocodingService extends AbstractMap implements IMapInformationHandler {
 
     private final String URLRoot        = "http://maps.google.com/maps/api/geocode/xml";
     private final String pathStatus     = "GeocodeResponse/status";
@@ -95,8 +96,8 @@ public class CBGeocoding extends CBMaps implements IMapDelegate{
      * @param address dirección postal que se quiere codificar de forma geográfica
      * @return devuelve un Point2D.Double donde la "x" es latitud y la "y" es longitud.
      * Devuelve 0.0 o null en caso de error.
-     * @see cbedoy.cbway.lib.CBGeocoding#getAddressFound()
-     * @see cbedoy.cbway.lib.CBGeocoding#getPostalcode()
+     * @see GeocodingService#getAddressFound()
+     * @see GeocodingService#getPostalcode()
      */
     public Point2D.Double getCoordinates(String address) throws UnsupportedEncodingException, MalformedURLException{
         this.addressFound="";

@@ -1,12 +1,8 @@
 package cbedoy.cbway.bussinescontrollers;
 
-import cbedoy.cbway.interfaces.IGravityServiceDelegate;
-import cbedoy.cbway.interfaces.INodeDelegate;
-import cbedoy.cbway.interfaces.INodeHandlerDelegate;
-import cbedoy.cbway.interfaces.INodeRepresentationDelegate;
-import cbedoy.cbway.interfaces.IWheaterServiceDelegate;
-import cbedoy.cbway.interfaces.IWheaterServiceInformationDelegate;
-import cbedoy.cbway.lib.CBGeocoding;
+import cbedoy.cbway.interfaces.*;
+import cbedoy.cbway.interfaces.IGravityServiceInformationHandler.*;
+import cbedoy.cbway.lib.GeocodingService;
 import cbedoy.cbway.services.WeatherKeySet;
 import java.awt.geom.Point2D;
 import java.io.UnsupportedEncodingException;
@@ -28,13 +24,13 @@ import java.util.List;
  * 25-may-2014 - 0:18:42
  */
 
-public class MasterViewController implements INodeHandlerDelegate, INodeDelegate{
+public class MasterViewController implements INodeInformationHandler, INodeInformationDelegate {
     
-    private MasterController                    masterController;
+    private MasterBusinessController            masterBusinessController;
     private static MasterViewController         masterViewController;
     private INodeRepresentationDelegate         nodeRepresentationDelegate;
-    private IGravityServiceDelegate             gravityServiceDelegate;
-    private IWheaterServiceDelegate             wheatherServiceDelegate;
+    private IGravityServiceInformationHandler   gravityServiceDelegate;
+    private IWheaterServiceInformationHandler   wheatherServiceDelegate;
     private IWheaterServiceInformationDelegate  wheatherServiceInformationDelegate;
     
     public static MasterViewController getInstance(){
@@ -44,23 +40,23 @@ public class MasterViewController implements INodeHandlerDelegate, INodeDelegate
     }
     
 
-    public MasterController getMasterController() {
-        return masterController;
+    public MasterBusinessController getMasterBusinessController() {
+        return masterBusinessController;
     }
 
-    public void setMasterController(MasterController masterController) {
-        this.masterController = masterController;
+    public void setMasterBusinessController(MasterBusinessController masterBusinessController) {
+        this.masterBusinessController = masterBusinessController;
     }
 
     public void setNodeRepresentationDelegate(INodeRepresentationDelegate nodeRepresentationDelegate) {
         this.nodeRepresentationDelegate = nodeRepresentationDelegate;
     }
 
-    public IGravityServiceDelegate getGravityServiceDelegate() {
+    public IGravityServiceInformationHandler getGravityServiceDelegate() {
         return gravityServiceDelegate;
     }
 
-    public void setGravityServiceDelegate(IGravityServiceDelegate gravityServiceDelegate) {
+    public void setGravityServiceDelegate(IGravityServiceInformationHandler gravityServiceDelegate) {
         this.gravityServiceDelegate = gravityServiceDelegate;
     }
 
@@ -71,10 +67,10 @@ public class MasterViewController implements INodeHandlerDelegate, INodeDelegate
     @Override
     public void userRequestSolution() {
         try {
-            HashMap<String, Object> solution    = gravityServiceDelegate.getSolution();
+            HashMap<SOLUTIONS, Object> solution    = gravityServiceDelegate.getSolution();
             double positionX                    = (double) solution.get("position_x");
             double positionY                    = (double) solution.get("position_y");
-            ArrayList<String> address           = masterController.getGeocoding().getAddress(positionX, positionY);
+            ArrayList<String> address           = masterBusinessController.getGeocoding().getAddress(positionX, positionY);
             String[] countryState               = address.get(1).split(", ");
             String[] cityAbbreviature           = address.get(0).split(", ");
             solution.put("country", address.get(2));
@@ -89,7 +85,7 @@ public class MasterViewController implements INodeHandlerDelegate, INodeDelegate
 
     @Override
     public void userRequestInformationTable() {
-        List<Object> dataModel          = masterController.getDataModel();
+        List<Object> dataModel          = masterBusinessController.getDataModel();
         Object lastRow                  = dataModel.get(dataModel.size()-1);
         nodeRepresentationDelegate.reloadTable((HashMap<WeatherKeySet, Object>) lastRow);
     }
@@ -97,9 +93,9 @@ public class MasterViewController implements INodeHandlerDelegate, INodeDelegate
     @Override
     public void userSelectedCountryWithCost(String country, Double cost) {
         try {
-            List<Object> dataModel                              = masterController.getDataModel();
+            List<Object> dataModel                              = masterBusinessController.getDataModel();
             HashMap<WeatherKeySet, Object> data                 = new HashMap<WeatherKeySet, Object>();
-            CBGeocoding geocoding                               = masterController.getGeocoding();
+            GeocodingService geocoding                               = masterBusinessController.getGeocoding();
             Point2D.Double coordinates                          = geocoding.getCoordinates(country);
             wheatherServiceDelegate.requestWithCordinates(coordinates.x, coordinates.y);
             HashMap<WeatherKeySet, Object> serviceInformation   = wheatherServiceInformationDelegate.getDataModel();
@@ -117,13 +113,13 @@ public class MasterViewController implements INodeHandlerDelegate, INodeDelegate
             data.put(WeatherKeySet.SUNRISE,     serviceInformation.get(WeatherKeySet.SUNRISE));
             data.put(WeatherKeySet.SUNSET,      serviceInformation.get(WeatherKeySet.SUNSET));
             dataModel.add(data);
-            masterController.setDataModel(dataModel);
+            masterBusinessController.setDataModel(dataModel);
         } catch (UnsupportedEncodingException | MalformedURLException ex) {
             
         }
     }    
 
-    public void setWheatherServiceDelegate(IWheaterServiceDelegate wheatherServiceDelegate) {
+    public void setWheatherServiceDelegate(IWheaterServiceInformationHandler wheatherServiceDelegate) {
         this.wheatherServiceDelegate = wheatherServiceDelegate;
     }
 

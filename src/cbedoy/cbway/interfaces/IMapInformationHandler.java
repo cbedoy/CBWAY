@@ -13,6 +13,6 @@ package cbedoy.cbway.interfaces;
  * 28/05/2014 - 05:57:27 PM
  */
 
-public interface IMapDelegate {
+public interface IMapInformationHandler {
 
 }

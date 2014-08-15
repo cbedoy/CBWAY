@@ -1,25 +1,21 @@
 package cbedoy.cbway.services;
 
 
-import cbedoy.cbway.interfaces.IGravityServiceDelegate;
+import cbedoy.cbway.interfaces.IGravityServiceInformationHandler;
+
 import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by Carlos on 11/05/2014.
  */
-public class GravityMethodService implements IGravityServiceDelegate{
+public class GravityMethodService implements IGravityServiceInformationHandler {
+
     private static GravityMethodService gravityMethodService;
     private List<Object>     dataModel;
     private double           totalCost;
     private double           gravityX;
     private double           gravityY;
-    
-    public static GravityMethodService getInstance(){
-        if(gravityMethodService == null)
-            gravityMethodService = new GravityMethodService();
-        return gravityMethodService;
-    }
 
     public GravityMethodService(){
         totalCost           = 0;
@@ -44,7 +40,7 @@ public class GravityMethodService implements IGravityServiceDelegate{
     private void calculateGravityX() {
         for(Object information : dataModel){
             HashMap<WeatherKeySet, Object> data    = (HashMap<WeatherKeySet, Object>) information;
-            gravityX                        += ((Double)data.get(WeatherKeySet.LATITUDE)) * ((Double)data.get(WeatherKeySet.COST));
+            gravityX                                += ((Double)data.get(WeatherKeySet.LATITUDE)) * ((Double)data.get(WeatherKeySet.COST));
         }
     }
 
@@ -57,10 +53,10 @@ public class GravityMethodService implements IGravityServiceDelegate{
     }
 
     @Override
-    public HashMap<String, Object> getSolution() {
-        HashMap<String, Object> data = new HashMap<String, Object>();
-        data.put("position_x", gravityX/totalCost );
-        data.put("position_y", gravityY/totalCost );
+    public HashMap<SOLUTIONS, Object> getSolution() {
+        HashMap<SOLUTIONS, Object> data = new HashMap<SOLUTIONS, Object>();
+        data.put(SOLUTIONS.X, gravityX/totalCost );
+        data.put(SOLUTIONS.Y, gravityY/totalCost );
         return data;
     }
 }
