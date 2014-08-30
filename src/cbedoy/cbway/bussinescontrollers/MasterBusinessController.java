@@ -32,7 +32,7 @@ public class MasterBusinessController implements INodeInformationDelegate {
     private StreetViewService streetView;
     private GravityMethodService    gravityService;
     
-    public static MasterBusinessController getInstanse(){
+    public static MasterBusinessController getInstance(){
         if(masterBusinessController == null)
             masterBusinessController = new MasterBusinessController();
         return masterBusinessController;

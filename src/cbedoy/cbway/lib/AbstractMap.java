@@ -43,8 +43,7 @@ public abstract class AbstractMap implements IMapInformationHandler {
 
     //Protected methods
     private static int numRequest=0;
-    protected void storageRequest(String urlRequest,String info,String status,
-            Exception exception){
+    protected void storageRequest(String urlRequest,String info,String status, Exception exception){
         Date date = new Date();
         numRequest+=1;
         AbstractMap.stockRequest=(String[][])(this.resizeArray(AbstractMap.stockRequest,numRequest));

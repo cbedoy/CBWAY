@@ -19,7 +19,7 @@ import java.util.List;
 
 public interface INodeRepresentationDelegate {
 
-    public void reloadData(HashMap<String, Object> dataModel);
+    public void reloadData(HashMap<Object, Object> dataModel);
     public void reloadTable(HashMap<WeatherKeySet, Object> dataModel);
     
 }

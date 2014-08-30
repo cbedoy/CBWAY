@@ -21,12 +21,16 @@ public interface IGravityServiceInformationHandler {
 
     public enum SOLUTIONS{
         X,
-        Y
+        Y,
+        COUNTRY,
+        STATE,
+        CITY,
+        DELEGATION
     }
 
 
     public void solveNodes(List<Object> dataModel);
     
-    public HashMap<SOLUTIONS, Object> getSolution();
+    public HashMap<Object, Object> getSolution();
     
 }

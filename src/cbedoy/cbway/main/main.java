@@ -36,19 +36,19 @@ public class main {
             Injector injector = Guice.createInjector(new Module());
             
             long time_start = System.currentTimeMillis();
-            IViewRepresentationHandler viewDelegateSplash                                = injector.getInstance(SplashView.class);
+            IViewRepresentationHandler viewDelegateSplash = injector.getInstance(SplashView.class);
             viewDelegateSplash.showView();
-            MainView mainView                                               = injector.getInstance(MainView.class);
-            IViewRepresentationHandler viewDelegateMain                                  = injector.getInstance(MainView.class);
+            MainView mainView = injector.getInstance(MainView.class);
+            IViewRepresentationHandler viewDelegateMain = injector.getInstance(MainView.class);
             MasterBusinessController masterBusinessController = injector.getInstance(MasterBusinessController.class);
-            GravityMethodService gravityMethodService                       = injector.getInstance(GravityMethodService.class);
-            List<Object> dataModel                                          = new ArrayList<Object>();
+            GravityMethodService gravityMethodService = injector.getInstance(GravityMethodService.class);
+            List<Object> dataModel = new ArrayList<Object>();
             
-            IGravityServiceInformationHandler serviceDelegate                         = injector.getInstance(GravityMethodService.class);
-            MasterViewController masterViewController                       = injector.getInstance(MasterViewController.class);
-            INodeRepresentationDelegate representationDelegate              = injector.getInstance(MainView.class);
-            INodeInformationDelegate nodeDelegate                                      = injector.getInstance(MasterViewController.class);
-            INodeInformationHandler handlerDelegate                            = injector.getInstance(MasterViewController.class);
+            IGravityServiceInformationHandler serviceDelegate = injector.getInstance(GravityMethodService.class);
+            MasterViewController masterViewController = injector.getInstance(MasterViewController.class);
+            INodeRepresentationDelegate representationDelegate = injector.getInstance(MainView.class);
+            INodeInformationDelegate nodeDelegate = injector.getInstance(MasterViewController.class);
+            INodeInformationHandler handlerDelegate = injector.getInstance(MasterViewController.class);
             
             representationDelegate.reloadData(null);
             masterBusinessController.setElevation(injector.getInstance(ElevationService.class));

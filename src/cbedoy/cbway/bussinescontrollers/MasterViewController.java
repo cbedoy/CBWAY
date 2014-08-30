@@ -67,16 +67,16 @@ public class MasterViewController implements INodeInformationHandler, INodeInfor
     @Override
     public void userRequestSolution() {
         try {
-            HashMap<SOLUTIONS, Object> solution    = gravityServiceDelegate.getSolution();
+            HashMap<Object, Object> solution    = gravityServiceDelegate.getSolution();
             double positionX                    = (double) solution.get("position_x");
             double positionY                    = (double) solution.get("position_y");
             ArrayList<String> address           = masterBusinessController.getGeocoding().getAddress(positionX, positionY);
             String[] countryState               = address.get(1).split(", ");
             String[] cityAbbreviature           = address.get(0).split(", ");
-            solution.put("country", address.get(2));
-            solution.put("state", countryState[0]);
-            solution.put("city", cityAbbreviature[1]);
-            solution.put("delegation", cityAbbreviature[0]);
+            solution.put(SOLUTIONS.COUNTRY, address.get(2));
+            solution.put(SOLUTIONS.STATE, countryState[0]);
+            solution.put(SOLUTIONS.CITY, cityAbbreviature[1]);
+            solution.put(SOLUTIONS.DELEGATION, cityAbbreviature[0]);
             nodeRepresentationDelegate.reloadData(solution);
         } catch (UnsupportedEncodingException | MalformedURLException ex) {
             

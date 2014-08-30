@@ -21,6 +21,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import static cbedoy.cbway.interfaces.IGravityServiceInformationHandler.*;
+
 /**
  *
  * @author Carlos
@@ -438,15 +440,17 @@ public class MainView extends javax.swing.JFrame implements INodeRepresentationD
 
     
     @Override
-    public void reloadData(HashMap<String, Object> dataModel) {
+    public void reloadData(HashMap<Object, Object> dataModel) {
         
         if(dataModel != null){
-            country_view        .setText(dataModel.get("country").toString().length()>35?dataModel.get("country").toString().substring(0, 35):dataModel.get("country").toString());
-            city_view           .setText(dataModel.get("city").toString());
-            delegation_view     .setText(dataModel.get("delegation").toString());
-            state_view          .setText(dataModel.get("state").toString());
-            latitude_view       .setText(dataModel.get("position_x").toString());
-            lenght_view         .setText(dataModel.get("position_y").toString());
+            country_view        .setText(dataModel.get(SOLUTIONS.COUNTRY).toString().length()>35 ?
+                                         dataModel.get(SOLUTIONS.COUNTRY).toString().substring(0, 35):
+                                         dataModel.get(SOLUTIONS.COUNTRY).toString());
+            city_view           .setText(dataModel.get(SOLUTIONS.CITY).toString());
+            delegation_view     .setText(dataModel.get(SOLUTIONS.DELEGATION).toString());
+            state_view          .setText(dataModel.get(SOLUTIONS.STATE).toString());
+            latitude_view       .setText(dataModel.get(SOLUTIONS.X).toString());
+            lenght_view         .setText(dataModel.get(SOLUTIONS.Y).toString());
             
         }else{
             country_view.setText(null);
